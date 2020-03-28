@@ -1,3 +1,4 @@
+import 'package:covid_19_tracker/pages/news.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -70,6 +71,26 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.width/3,
+              width: double.infinity,
+              child: Center(
+                child: Text('Drawer Image Here'),
+              ),
+            ),
+            ListTile(
+              title: Text('News'),
+              leading: Icon(Icons.new_releases),
+              onTap: ()=>Navigator.push(context, MaterialPageRoute(
+                builder: ((context)=>NewsList())
+              )),
+            )
+          ],
+        ),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
