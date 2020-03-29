@@ -1,0 +1,1 @@
+// show news data
