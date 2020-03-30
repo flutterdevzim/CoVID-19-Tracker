@@ -2,6 +2,13 @@
 
 A new Flutter application.
 
+### Flutter UI
+- redesign of
+![altr covid app](assets/ui_designs/altfix.png)
+
+### App UI demo
+![covid-19 gif](assets/ui_designs/altfix-covid-19.gif)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
