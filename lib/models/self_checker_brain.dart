@@ -39,6 +39,10 @@ class SelfCheckerBrain {
     return _selfCheckerData[_questionNumber].selfCheckQuestion;
   }
 
+  int getQuestionNumber() {
+    return _questionNumber;
+  }
+
   String getAnswer1() {
     return _selfCheckerData[_questionNumber].answer1;
   }
