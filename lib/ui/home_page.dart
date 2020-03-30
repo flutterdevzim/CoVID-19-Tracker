@@ -1,3 +1,5 @@
+import 'package:covid_19_tracker/models/self_checker_model.dart';
+import 'package:covid_19_tracker/ui/self_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:covid_19_tracker/models/countries.dart';
@@ -187,7 +189,13 @@ class _HomePageState extends State<HomePage> {
                             width: 5.0,
                           ),
                           IconButton(
-                            onPressed: () => print('self check button pressed'),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          SelfCheckerScreen()));
+                            },
                             icon: Icon(
                               Icons.chevron_right,
                               color: Colors.white,
