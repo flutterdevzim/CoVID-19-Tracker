@@ -1,4 +1,5 @@
 import 'package:covid_19_tracker/models/self_checker_model.dart';
+import 'package:covid_19_tracker/ui/news.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
@@ -216,44 +217,29 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(
                 left: 10.0,
               ),
-              child: Text(
-                'Covid-19 Latest Update',
-                style: TextStyle(
-                  color: questionsPageBGColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-                right: 10.0,
-              ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Last updated 25 Mar 20-16:37 WIB',
+                    'Latest Covid-19 News',
                     style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 11.0,
+                      color: questionsPageBGColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
                     ),
                   ),
-                  Icon(
-                    Icons.refresh,
-                    size: 12.0,
-                    color: Colors.grey,
+                  SizedBox(
+                    width: 55,
                   ),
-                  Spacer(),
                   GestureDetector(
-                    onTap: () => print('Update details pressed'),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => NewsList()));
+                    },
                     child: Text(
-                      'Details',
+                      'View News',
                       style: TextStyle(
                         color: Colors.blue,
-                        fontSize: 11.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
