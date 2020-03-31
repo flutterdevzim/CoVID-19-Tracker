@@ -1,32 +1,9 @@
 class DateHelper{
   var now = DateTime.now();
   // ignore: missing_return
-  String getDay(){
-    switch(now.weekday){
-      case 1:
-        return "${_days[1].day}";
-        break;
-      case 2:
-        return "${_days[2].day}";
-        break;
-      case 3:
-        return "${_days[3].day}";
-        break;
-      case 4:
-        return "${_days[4].day}";
-        break;
-      case 5:
-        return "${_days[5].day}";
-        break;
-      case 6:
-        return "${_days[6].day}";
-        break;
-      case 7:
-        return "${_days[0].day}";
-        break;
-      default:
-        break;
-    }
+  getDay(){
+    var day = now.weekday == 7 ? _days[0].day : _days[now.weekday].day;
+    return day;
   }
 
    getDate(){
