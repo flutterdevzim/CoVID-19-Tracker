@@ -1,5 +1,6 @@
 import 'package:covid_19_tracker/ui/news.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
+import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:covid_19_tracker/models/countries.dart';
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var _date = new DateHelper();
   List<Countries> _countries = Countries.getCountries();
   List<DropdownMenuItem<Countries>> _dropDownMenuItems;
   Countries _country;
@@ -31,7 +33,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             country.countryName,
             style: TextStyle(
-              fontSize: 25.0,
+              fontSize: 30.0,
               fontWeight: FontWeight.bold,
               color: questionsPageBGColor,
               decoration: TextDecoration.none,
@@ -51,6 +53,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var _width = MediaQuery.of(context).size.width;
+    var _height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -71,6 +75,7 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: questionsPageBGColor,
+                      fontSize: 18,
                     ),
                   ),
                   Padding(
@@ -114,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                 left: 10.0,
               ),
               child: Text(
-                'Wed, 25 Mar 20',
+                '${_date.getDay()}, ${_date.getDate()} ${_date.getMonth()} ${_date.getYear()}',
                 style: TextStyle(color: Colors.grey.shade600),
               ),
             ),
@@ -187,15 +192,11 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             SizedBox(
-                              width: 0.125 * MediaQuery.of(context).size.width,
+                              width: 0.125 * _width,
                             ),
                             IconButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SelfCheckerScreen()));
+                                Navigator.push(context,MaterialPageRoute(builder: (context) => SelfCheckerScreen()));
                               },
                               icon: Icon(
                                 Icons.chevron_right,
@@ -259,10 +260,10 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(3.0),
                   color: Colors.grey,
                 ),
-                child: Center(
-                  child: Text(
-                    'TODO: Buttons',
-                  ),
+                child: Row(
+                  children: <Widget>[
+                    
+                  ],
                 ),
               ),
             ),
