@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
-
     return items;
   }
 
@@ -54,6 +53,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
             Padding(
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     'Current outbreak',
@@ -73,7 +73,6 @@ class _HomePageState extends State<HomePage> {
                       color: questionsPageBGColor,
                     ),
                   ),
-                  Spacer(),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: InkWell(
@@ -216,10 +215,9 @@ class _HomePageState extends State<HomePage> {
               height: 30.0,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     'Latest Covid-19 News',
@@ -254,13 +252,13 @@ class _HomePageState extends State<HomePage> {
             ),
             // TODO: Add buttons
             Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-                right: 10.0,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Container(
                 height: 120.0,
-                color: Colors.grey,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3.0),
+                  color: Colors.grey,
+                ),
                 child: Center(
                   child: Text(
                     'TODO: Buttons',
