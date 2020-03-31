@@ -22,7 +22,7 @@ class CoronaNewsDataService {
 
     else
     {
-      throw "Failed to get new from API";
+      throw "Failed to get news from API";
     }
   }
 

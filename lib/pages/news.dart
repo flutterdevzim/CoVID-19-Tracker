@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsList extends StatelessWidget {
@@ -13,7 +11,7 @@ class NewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size cardSize = Size(300.0, 460.0);
+    // final Size cardSize = Size(300.0, 460.0);
     return Scaffold(
       body: FutureBuilder(
 
