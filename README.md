@@ -20,7 +20,7 @@ Contributions are welcome!
 2. Fork the project ([Need help forking a project?][3]). You'll do all of your work on your forked copy.
 3. Create a branch specific to the issue or feature you are working on. Push your work on that branch ([Need help with branching?][4]).
 4. Name the branch something like `fixes-xxx-issue` or `add-xxx-feature` where `xxx` is a short description of the changes or feature you are adding.
-5. Once your code is ready, submit a pull request from your branch to DevJournal's `master` branch. I'll do a quick review and give you feedback.
+5. Once your code is ready, submit a pull request from your branch to CoVID-19 Tracker's `master` branch. I'll do a quick review and give you feedback.
 
 [0]: https://github.com/flutterdevzim/CoVID-19-Tracker/issues
 [1]: https://github.com/flutterdevzim/CoVID-19-Tracker/issues/new
