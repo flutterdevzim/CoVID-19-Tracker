@@ -1,6 +1,6 @@
-import 'package:covid_19_tracker/models/self_checker_model.dart';
 import 'package:covid_19_tracker/ui/news.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
+import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:covid_19_tracker/models/countries.dart';
@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var _date = new DateHelper();
   List<Countries> _countries = Countries.getCountries();
   List<DropdownMenuItem<Countries>> _dropDownMenuItems;
   Countries _country;
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             country.countryName,
             style: TextStyle(
-              fontSize: 25.0,
+              fontSize: 30.0,
               fontWeight: FontWeight.bold,
               color: questionsPageBGColor,
               decoration: TextDecoration.none,
@@ -41,7 +42,6 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
-
     return items;
   }
 
@@ -53,8 +53,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var _width = MediaQuery.of(context).size.width;
+    var _height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
             Padding(
@@ -65,38 +68,34 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     'Current outbreak',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: questionsPageBGColor,
+                      fontSize: 18,
                     ),
                   ),
-                  Spacer(),
-                  InkWell(
-                    onTap: () => print('notifications pressed'),
-                    child: Badge(
-                      badgeContent: Text(
-                        '0',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: InkWell(
+                      onTap: () => print('notifications pressed'),
+                      child: Badge(
+                        badgeContent: Text(
+                          '0',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.notifications,
+                          color: Colors.grey,
+                          size: 25.0,
                         ),
                       ),
-                      child: Icon(
-                        Icons.notifications,
-                        color: Colors.grey,
-                        size: 25.0,
-                      ),
                     ),
-                  ),
-                  // FIXME: Badge cant seem to respect the padding, so did this lazy trick
-                  SizedBox(
-                    width: 15.0,
-                  ),
-                  Text(
-                    '',
                   ),
                 ],
               ),
@@ -120,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                 left: 10.0,
               ),
               child: Text(
-                'Wed, 25 Mar 20',
+                '${_date.getDay()}, ${_date.getDate()} ${_date.getMonth()} ${_date.getYear()}',
                 style: TextStyle(color: Colors.grey.shade600),
               ),
             ),
@@ -130,83 +129,86 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: EdgeInsets.only(
                 left: 10.0,
+                right: 10.0,
               ),
-              child: Container(
-                height: 135.0,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: questionsPageBGColor.withOpacity(0.9),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5.0),
-                    bottomLeft: Radius.circular(5.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 2.0,
-                      offset: Offset(0.0, 3.0),
+              child: Card(
+                elevation: 24.0,
+                child: Container(
+                  height: 135.0,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: questionsPageBGColor.withOpacity(0.9),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5.0),
+                      bottomLeft: Radius.circular(5.0),
+                      topRight: Radius.circular(5.0),
+                      bottomRight: Radius.circular(5.0)
                     ),
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.4),
-                      blurRadius: 2.0,
-                      offset: Offset(0.0, 8.0),
-                    ),
-                  ],
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/images/corona1.png',
-                      color: Colors.red,
-                    ),
-                    Positioned(
-                      top: 30.0,
-                      left: 60.0,
-                      child: Row(
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                'Safe Check Up Covid-19',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15.0,
-                              ),
-                              Text(
-                                'Contain several list of questions to check\nyour physical condition.',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 11.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          SelfCheckerScreen()));
-                            },
-                            icon: Icon(
-                              Icons.chevron_right,
-                              color: Colors.white,
-                              size: 30.0,
-                            ),
-                          ),
-                        ],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 2.0,
+                        offset: Offset(0.0, 1.0),
                       ),
-                    ),
-                  ],
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.4),
+                        blurRadius: 2.0,
+                        offset: Offset(0.0, 2.0),
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/images/corona1.png',
+                        color: Colors.red,
+                      ),
+                      Positioned(
+                        top: 30.0,
+                        left: 60.0,
+                        child: Row(
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'Safe Check Up Covid-19',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                Text(
+                                  'Contain several list of questions to check\nyour physical condition.',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 0.125 * _width,
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(context,MaterialPageRoute(builder: (context) => SelfCheckerScreen()));
+                              },
+                              icon: Icon(
+                                Icons.chevron_right,
+                                color: Colors.white,
+                                size: 50.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -214,10 +216,9 @@ class _HomePageState extends State<HomePage> {
               height: 30.0,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     'Latest Covid-19 News',
@@ -252,17 +253,17 @@ class _HomePageState extends State<HomePage> {
             ),
             // TODO: Add buttons
             Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-                right: 10.0,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Container(
                 height: 120.0,
-                color: Colors.grey,
-                child: Center(
-                  child: Text(
-                    'TODO: Buttons',
-                  ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3.0),
+                  color: Colors.grey,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    
+                  ],
                 ),
               ),
             ),

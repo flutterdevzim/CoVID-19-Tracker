@@ -1,4 +1,3 @@
-import 'package:covid_19_tracker/models/corona_news.dart';
 import 'package:covid_19_tracker/utils/corona_news_data.dart';
 import 'package:flutter/material.dart';
 

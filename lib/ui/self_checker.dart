@@ -20,7 +20,9 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
         title: Text(
           'Self Check Up',
           style: TextStyle(
-              fontSize: 23, fontWeight: FontWeight.w700, color: Colors.white),
+            fontSize: 23, fontWeight: FontWeight.w700,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: Color(0xFF212b46),
       ),
@@ -43,10 +45,10 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   SizedBox(
-                    width: 250,
+                    width: 0.82* MediaQuery.of(context).size.width,
                     child: StepProgressIndicator(
                       totalSteps: 5,
                       currentStep: selfCheckerBrain.getQuestionNumber(),
@@ -66,6 +68,7 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                 ],
               ),
               Container(
+                alignment: Alignment.center,
                 height: 300,
                 decoration: BoxDecoration(
                   color: Colors.white,
