@@ -7,4 +7,4 @@ ThemeData colorTheme = ThemeData(
   fontFamily: 'Quicksand',
 );
 
-Color questionsPageBGColor = Color(0xFF212b46);
+Color questionsPageBGColor = Color(0xFF212B46);
