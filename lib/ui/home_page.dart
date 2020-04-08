@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Text(
                 '${_date.getDay()}, ${_date.getDate()} ${_date.getMonth()} ${_date.getYear()}',
-                style: TextStyle(color: Colors.grey.shade600),
+                style: TextStyle(color: Color(0xFFA4ACC3), fontSize: 15,),
               ),
             ),
             SizedBox(
@@ -251,20 +251,162 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 10.0,
             ),
-            // TODO: Add buttons
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0),
-              child: Container(
-                height: 120.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3.0),
-                  color: Colors.grey,
-                ),
-                child: Row(
-                  children: <Widget>[
-                    
-                  ],
-                ),
+            Container(
+              height: 140.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Container(
+                      width: 0.270270 * _width,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFEEEE1),
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Color(0xFFFC9246),)
+                              ),
+                              child: Icon(Icons.add, color: Color(0xFFFC9246), size: 15,),
+                            ),
+                            SizedBox(height: 20),
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    "790",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                      color: Color(0xFFFC9246),
+                                    ),
+                                  ),
+                                  Text(
+                                    "INFECTED",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Container(
+                      width: 0.270270 * _width,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFE2FFEF),
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Color(0xFF44B876),),
+                              ),
+                              child: Icon(Icons.favorite, color: Color(0xFF44B876), size: 15,),
+                            ),
+                            SizedBox(height: 20,),
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    "31",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                      color: Color(0xFF44B876),
+                                    ),
+                                  ),
+                                  Text(
+                                    "RECOVERED",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 0.270270 * _width,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF4E6F5),
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Color(0xFFF94340))
+                            ),
+                            child: Icon(Icons.close, color: Color(0xFFF94340), size: 15,),
+                          ),
+                          SizedBox(height: 20),
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  "58",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30,
+                                    color: Color(0xFFF94340),
+                                  ),
+                                ),
+                                Text(
+                                  "DEATHS",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
