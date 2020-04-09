@@ -1,20 +1,21 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:covid_19_tracker/services/api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsList extends StatelessWidget {
+  final _api = ApiService();
   final List<String> images;
   final VoidCallback loadMore;
 
-  const NewsList({Key key, this.images, this.loadMore}) : super(key: key);
+  NewsList({Key key, this.images, this.loadMore}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // final Size cardSize = Size(300.0, 460.0);
     return Scaffold(
       body: FutureBuilder(
-        future: this.loadNews(),
+        //future: this.loadNews(),
+        future: _api.loadNews(),
         builder: (context, snap) {
           if (snap.hasData) {
             final height = MediaQuery.of(context).size.height;
@@ -138,13 +139,5 @@ class NewsList extends StatelessWidget {
         },
       ),
     );
-  }
-
-  Future<List> loadNews() async {
-    // get data
-    String url = 'https://cvtrackerzw.herokuapp.com/news';
-    final response = await http.get(url);
-    final data = jsonDecode(response.body);
-    return data['articles'];
   }
 }

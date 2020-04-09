@@ -4,6 +4,7 @@ import 'package:covid_19_tracker/ui/home_page.dart';
 import 'package:flutter/services.dart';
 
 void main(){
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
 }

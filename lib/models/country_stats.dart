@@ -1,7 +1,8 @@
 // To parse this JSON data, do
-//  [auto generated from https://app.quicktype.io/]
-//  [from api https://corona.lmao.ninja/countries/ZIMBABWE]
 //  final stats = statsFromJson(jsonString);
+
+//  [auto generated from https://app.quicktype.io/]
+//  [as from api response from >>> https://corona.lmao.ninja/countries/ZIMBABWE]
 
 import 'dart:convert';
 
