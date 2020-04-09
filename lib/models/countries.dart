@@ -8,12 +8,11 @@ class Countries
 
   static List<Countries> getCountries() {
     return <Countries>[
-      Countries(0, 'Indonesia'),
-      Countries(1, 'China'),
-      Countries(2, 'Italy'),
-      Countries(3, 'USA'),
-      Countries(4, 'South Africa'),
-      Countries(5, 'Zimbabwe'),
+      Countries(0, 'Zimbabwe'),
+      Countries(1, 'South Africa'),
+      Countries(2, 'China'),
+      //Countries(3, 'Italy'),
+      //Countries(4, 'France'),
     ];
   }
 }

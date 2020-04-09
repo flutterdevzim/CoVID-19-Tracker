@@ -24,24 +24,17 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.7.0
-  charts_flutter: ^0.9.0
-  fl_chart: ^0.8.7
+  bezier_chart: ^1.0.16
   http: ^0.12.0+4
   bubble_tab_indicator: ^0.1.4
   badges: ^1.1.1
   shimmer: ^1.1.0
-  latlong: ^0.6.1
-  json_annotation: ^3.0.1
   step_progress_indicator: ^0.2.0+3
   url_launcher: ^5.4.2
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  build_runner: ^1.8.0
-  json_serializable: ^3.2.5
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
