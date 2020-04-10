@@ -1,6 +1,7 @@
 import 'package:covid_19_tracker/models/country_stats.dart';
 import 'package:covid_19_tracker/services/api_services.dart';
 import 'package:covid_19_tracker/ui/news.dart';
+import 'package:covid_19_tracker/ui/preventative_measures_screen.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
 import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:covid_19_tracker/widgets/stats_shimmer.dart';
@@ -483,6 +484,26 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PreventativeMeasuresScreen(),
+              ),
+            );
+          },
+          tooltip: "Prevent Covid-19",
+          backgroundColor: Colors.blueAccent,
+          child: Center(
+            child: Image.asset(
+              'assets/images/prevent_corona_small.png',
+              height: 40.0,
+              width: 40.0,
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }
