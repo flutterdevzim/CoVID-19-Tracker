@@ -8,4 +8,4 @@ ThemeData colorTheme = ThemeData(
 );
 
 Color questionsPageBGColor = Color(0xFF212B46);
-Color preventivePageBGColor = Color(0xFF5a7ef9);
+Color preventivePageBGColor = Color(0xFF212B46);
