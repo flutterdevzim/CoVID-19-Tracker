@@ -3,45 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 final List<String> imgList = [
-  'assets/images/doctor.png',
+  'assets/images/hand-wash.jpeg',
   'assets/images/human_contact.png',
   'assets/images/prevent_corona_small.png',
+  'assets/images/air.png'
+];
+
+final List<String> stepList = [
+  'Wash your hands frequently',
+  'Maintain social distancing',
+  'Avoid touching eyes, nose and mouth',
+  'Practice respiratory hygiene',
+];
+
+final List<String> infoList = [
+  'Washing your hands with soap and water or using alcohol-based sanitizer kills viruses that may be on your hands.',
+  'Maintain at least 1 metre (3 feet) distance between yourself and anyone who is coughing or sneezing. If you are too close, you can breathe in the droplets, including the COVID-19 virus if the person coughing has the disease. ',
+  'Hands touch many surfaces and can pick up viruses. Once contaminated, hands can transfer the virus to your eyes, nose or mouth. From there, the virus can enter your body and can make you sick.',
+  'Make sure you, and the people around you, follow good respiratory hygiene. This means covering your mouth and nose with your bent elbow or tissue when you cough or sneeze. Then dispose of the used tissue immediately.'
 ];
 
 final List carouselImages = map<Widget>(
-  imgList,
+  imgList, stepList, infoList,
       (index, i) {
     return Container(
+      height: 200,
       margin: EdgeInsets.all(5.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        child: Stack(children: <Widget>[
-          Image.asset(i, fit: BoxFit.cover, width: 200),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color.fromARGB(200, 0, 0, 0), Color.fromARGB(0, 0, 0, 0)],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
-            ),
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            child: Text(
-              'No. $index image',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ]),
+      child: Column(
+        children: <Widget>[
+          Image.asset(i, fit: BoxFit.fitHeight, width: 200),
+          Expanded(child: Text(stepList[index])),
+          Expanded(child: Text(infoList[index]))
+        ],
       ),
     );
   },
 ).toList();
 
-List<T> map<T>(List list, Function handler) {
+List<T> map<T>(List list, List wordList, List infoList, Function handler) {
   List<T> result = [];
   for (var i = 0; i < list.length; i++) {
     result.add(handler(i, list[i]));
@@ -69,7 +68,7 @@ class _PreventativeMeasuresScreenState
         body: Column(
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.width * 0.65,
+              height: MediaQuery.of(context).size.width * 0.50,
               width: MediaQuery.of(context).size.width,
               color: Colors.transparent,
               child: Stack(
@@ -150,7 +149,7 @@ class _PreventativeMeasuresScreenState
               ),
             ),
             Text(
-              'Take steps to protect yourself',
+              'Take steps to protect yourself and others',
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -164,7 +163,7 @@ class _PreventativeMeasuresScreenState
                 CarouselSlider(
                   items: carouselImages,
                   viewportFraction: 1.0,
-                  aspectRatio: 2.0,
+                  aspectRatio: 1.1,
                   autoPlay: false,
                   enlargeCenterPage: false,
                   onPageChanged: (index) {
@@ -176,12 +175,12 @@ class _PreventativeMeasuresScreenState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: map<Widget>(
-                    imgList,
+                    imgList, stepList, infoList,
                         (index, url) {
                       return Container(
                         width: 8.0,
                         height: 8.0,
-                        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _current == index
@@ -192,51 +191,6 @@ class _PreventativeMeasuresScreenState
                   ),
                 ),
               ],
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 10.0,
-                  right: 10.0,
-                  bottom: 10.0,
-                ),
-                child: FlatButton(
-                  padding: EdgeInsets.all(15.0),
-                  onPressed: () => {},
-                  color: preventivePageBGColor,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 30.0,
-                        right: 30.0,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Steps to protect others',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.white,
-                            size: 12.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             ),
           ],
         ),
