@@ -32,6 +32,7 @@ dependencies:
   step_progress_indicator: ^0.2.0+3
   url_launcher: ^5.4.2
   carousel_slider: ^1.4.1
+  syncfusion_flutter_charts: ^18.1.45
 
 dev_dependencies:
   flutter_test:

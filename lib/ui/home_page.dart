@@ -6,6 +6,7 @@ import 'package:covid_19_tracker/services/api_services.dart';
 import 'package:covid_19_tracker/ui/news.dart';
 import 'package:covid_19_tracker/ui/preventative_measures_screen.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
+import 'package:covid_19_tracker/ui/stats_page.dart';
 import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:covid_19_tracker/widgets/stats_shimmer.dart';
 import 'package:flutter/material.dart';
@@ -202,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: null,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => StatisticsPage())),
                     child: Text(
                       'More Stats',
                       style: TextStyle(

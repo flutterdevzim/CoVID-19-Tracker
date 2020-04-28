@@ -9,3 +9,5 @@ ThemeData colorTheme = ThemeData(
 
 Color questionsPageBGColor = Color(0xFF212B46);
 Color preventivePageBGColor = Color(0xFF212B46);
+Color darkColor = Color(0xFF212B46);
+Color textColor = Colors.white;
