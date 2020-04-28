@@ -71,10 +71,10 @@ class _HomePageState extends State<HomePage> {
                     ),
 
                   ), onTap: () {
-                    Navigator.push(
+                    /*Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AboutPage()));
+                            builder: (context) => AboutPage()));*/
                   },
                   ),
                 ],
@@ -639,26 +639,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PreventativeMeasuresScreen(),
-              ),
-            );
-          },
-          tooltip: "Prevent Covid-19",
-          backgroundColor: Colors.blueAccent,
-          child: Center(
-            child: Image.asset(
-              'assets/images/prevent_corona_small.png',
-              height: 40.0,
-              width: 40.0,
-            ),
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }

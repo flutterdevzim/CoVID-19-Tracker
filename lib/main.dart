@@ -1,4 +1,6 @@
+import 'package:covid_19_tracker/ui/base.dart';
 import 'package:covid_19_tracker/ui/donate_page.dart';
+import 'package:covid_19_tracker/ui/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:flutter/services.dart';
@@ -18,8 +20,7 @@ class MyApp extends StatelessWidget {
       theme: colorTheme,
       
       //home: HomePage(),
-      home: DonatePage(),   // for testing DonatePage()
-
+      home: Base(),
     );
   }
 }

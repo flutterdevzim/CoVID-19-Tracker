@@ -93,102 +93,104 @@ class _PreventativeMeasuresScreenState
     ),
     backgroundColor: Color(0xFF212b46)
         ),
-        body: Column(
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.width * 0.40,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.transparent,
-              child: Stack(
-                children: <Widget>[
-                  ClipPath(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width * 0.6,
-                      decoration: BoxDecoration(
-                        color: preventivePageBGColor,
-                      ),
-                    ),
-                    clipper: CustomClipPath(),
-                  ),
-                  Positioned(
-                    left: 20.0,
-                    bottom: 25.0,
-                    child: Image.asset(
-                      'assets/images/doctor.png',
-                      height: 100.0,
-                    ),
-                  ),
-                  Positioned(
-                    left: 85.0,
-                    bottom: 70.0,
-                    child: Image.asset(
-                      'assets/images/stop_covid.png',
-                      height: 50.0,
-                      width: 50.0,
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 90.0,
-                    right: 35.0,
-                    child: Text(
-                      'All you need to\n do is stay at home.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17.0,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Text(
-              'Take steps to protect yourself and others',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            Column(
-              children: <Widget>[
-                CarouselSlider(
-                  items: carouselImages,
-                  viewportFraction: 1.0,
-                  aspectRatio: 1.1,
-                  autoPlay: false,
-                  enlargeCenterPage: false,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: map<Widget>(
-                    imgList, stepList, infoList,
-                        (index, url) {
-                      return Container(
-                        width: 8.0,
-                        height: 8.0,
-                        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.width * 0.40,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.transparent,
+                child: Stack(
+                  children: <Widget>[
+                    ClipPath(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.width * 0.6,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _current == index
-                                ? Color.fromRGBO(0, 0, 0, 0.9)
-                                : Color.fromRGBO(0, 0, 0, 0.4)),
-                      );
+                          color: preventivePageBGColor,
+                        ),
+                      ),
+                      clipper: CustomClipPath(),
+                    ),
+                    Positioned(
+                      left: 20.0,
+                      bottom: 25.0,
+                      child: Image.asset(
+                        'assets/images/doctor.png',
+                        height: 100.0,
+                      ),
+                    ),
+                    Positioned(
+                      left: 85.0,
+                      bottom: 70.0,
+                      child: Image.asset(
+                        'assets/images/stop_covid.png',
+                        height: 50.0,
+                        width: 50.0,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 90.0,
+                      right: 35.0,
+                      child: Text(
+                        'All you need to\n do is stay at home.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17.0,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Text(
+                'Take steps to protect yourself and others',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Column(
+                children: <Widget>[
+                  CarouselSlider(
+                    items: carouselImages,
+                    viewportFraction: 1.0,
+                    aspectRatio: 1.1,
+                    autoPlay: false,
+                    enlargeCenterPage: false,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _current = index;
+                      });
                     },
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: map<Widget>(
+                      imgList, stepList, infoList,
+                          (index, url) {
+                        return Container(
+                          width: 8.0,
+                          height: 8.0,
+                          margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _current == index
+                                  ? Color.fromRGBO(0, 0, 0, 0.9)
+                                  : Color.fromRGBO(0, 0, 0, 0.4)),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -300,6 +300,7 @@ class ApiService {
     ];
 
     return donors;
+  }
 
   Future<DateUpdated> getDateUpdated() async{
     var url = "$_baseStatsUrl/dateUpdate";

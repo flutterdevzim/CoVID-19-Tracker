@@ -1,4 +1,3 @@
-import 'package:bezier_chart/bezier_chart.dart';
 import 'package:covid_19_tracker/models/countrystats.dart';
 import 'package:covid_19_tracker/services/api_services.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
