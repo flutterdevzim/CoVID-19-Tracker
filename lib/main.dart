@@ -1,4 +1,4 @@
-import 'package:covid_19_tracker/ui/hotline_screen.dart';
+import 'package:covid_19_tracker/ui/donate_page.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
       title: 'CoVID-19 App',
       debugShowCheckedModeBanner: false,
       theme: colorTheme,
-      home: HotlineScreen(),
+      
+      //home: HomePage(),
+      home: DonatePage(),   // for testing DonatePage()
+
     );
   }
 }
