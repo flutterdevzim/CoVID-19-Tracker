@@ -368,7 +368,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
+                                const EdgeInsets.only(left: 15.0),
                             child: Container(
                               width: 0.270270 * _width,
                               decoration: BoxDecoration(
