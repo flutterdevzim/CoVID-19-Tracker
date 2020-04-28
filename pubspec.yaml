@@ -30,6 +30,8 @@ dependencies:
   shimmer: ^1.1.0
   step_progress_indicator: ^0.2.0+3
   url_launcher: ^5.4.2
+  url: ^2.0.0
+  url_launcher_web: ^0.1.0
   carousel_slider: ^1.4.1
   intl: ^0.16.1
   syncfusion_flutter_charts: ^18.1.45

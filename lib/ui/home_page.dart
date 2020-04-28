@@ -61,24 +61,21 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 18,
                     ),
                   ),
-                  Padding(
+                  GestureDetector(child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: InkWell(
-                      onTap: () => print('notifications pressed'),
-                      child: Badge(
-                        badgeContent: Text(
-                          '0',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.notifications,
-                          color: Colors.grey,
-                          size: 25.0,
-                        ),
-                      ),
+
+                    child: Icon(
+                      Icons.info,
+                      color: Colors.grey,
+                      size: 38.5,
                     ),
+
+                  ), onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutPage()));
+                  },
                   ),
                 ],
               ),
