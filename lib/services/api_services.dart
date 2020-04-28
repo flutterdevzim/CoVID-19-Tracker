@@ -38,4 +38,17 @@ class ApiService {
     }
     return date;
   }
+
+  Future<CasesBySex> getSexUpdate() async{
+    var url = "$_baseStatsUrl/sexUpdate";
+    var response;
+    CasesBySex data;
+    try{
+      response = await http.get(url);
+      data = CasesBySex.fromJson(json.decode(response.body)[0]);
+    }catch(e){
+      print(e);
+    }
+    return data;
+  }
 }

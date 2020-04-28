@@ -202,12 +202,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => NewsList()));
-                    },
+                    onTap: null,
                     child: Text(
-                      'View News',
+                      'More Stats',
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 12.0,
@@ -551,6 +548,67 @@ class _HomePageState extends State<HomePage> {
                 }),
             SizedBox(
               height: 10.0,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 10.0,
+                right: 10.0,
+              ),
+              child: Card(
+                elevation: 24.0,
+                child: Container(
+                  height: 50.0,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: questionsPageBGColor.withOpacity(0.9),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5.0),
+                        bottomLeft: Radius.circular(5.0),
+                        topRight: Radius.circular(5.0),
+                        bottomRight: Radius.circular(5.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 2.0,
+                        offset: Offset(0.0, 1.0),
+                      ),
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.4),
+                        blurRadius: 2.0,
+                        offset: Offset(0.0, 2.0),
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/images/corona1.png',
+                        color: Colors.red,
+                      ),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(left: 30),
+                              child: Text(
+                                "Interested in CoVID-19 News?",
+                                style: TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.arrow_forward_ios, color: Colors.white,),
+                              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsList())),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(
