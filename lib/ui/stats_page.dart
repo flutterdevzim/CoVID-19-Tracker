@@ -78,7 +78,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                         CasesBySex cases = snap.data;
                         return Container(
                           width: 0.9 * _width,
-                          height: 200,
+                          height: 170,
                           decoration: BoxDecoration(
                             color: textColor,
                           ),
@@ -125,7 +125,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                           )
                         );
                       }else{
-                        return CircularProgressIndicator();
+                        return Center(child: SizedBox(height: 20, width: 20,child: CircularProgressIndicator()));
                       }
                     }
                   )
@@ -138,6 +138,59 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     color: textColor,
                   ),
                 ),
+                children: <Widget>[
+                  FutureBuilder(
+                    future: _api.getProvincesData(),
+                    // ignore: missing_return
+                    builder: (context, snap){
+                      if(snap.hasData){
+                        ProvinceCases cases = snap.data;
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 170,
+                            decoration: BoxDecoration(
+                              color: textColor,
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                  child: SfCartesianChart(
+                                    primaryXAxis: CategoryAxis(),
+                                    title: ChartTitle(text: "Provinces Data",),
+                                    tooltipBehavior: TooltipBehavior(enable: true),
+                                    series: <ChartSeries<ProvinceStats, String>>[
+                                      LineSeries<ProvinceStats, String>(
+                                        dataSource: <ProvinceStats>[
+                                          ProvinceStats("Byo", int.parse(cases.bulawayo)),
+                                          ProvinceStats("Hre", int.parse(cases.harare)),
+                                          ProvinceStats("Manica", int.parse(cases.manicaland)),
+                                          ProvinceStats("MashC", int.parse(cases.mashonaland_central)),
+                                          ProvinceStats("MashE", int.parse(cases.mashonaland_east)),
+                                          ProvinceStats("MashW", int.parse(cases.mashonaland_west)),
+                                          ProvinceStats("Masv", int.parse(cases.masvingo)),
+                                          ProvinceStats("MatN", int.parse(cases.matabeleland_north)),
+                                          ProvinceStats("MatS", int.parse(cases.matabeleland_south)),
+                                          ProvinceStats("Mid", int.parse(cases.midlands)),
+
+                                        ],
+                                        xValueMapper: (ProvinceStats stats, _) => stats.province,
+                                        yValueMapper: (ProvinceStats stats, _) => stats.value,
+                                        width: 0.4,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }else{
+                        return Center(child: SizedBox(height: 20, width: 20,child: CircularProgressIndicator()));
+                      }
+                    },
+                  ),
+                ],
               ),
               ExpansionTile(
                 title: Text(
@@ -155,7 +208,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                         print(snap.data);
                         List<PositiveCases> cases = snap.data;
                         return Container(
-                          height: 200,
+                          height: 170,
                           width: 0.9 * _width,
                           child: ListView.builder(
                             scrollDirection: Axis.vertical,
@@ -175,7 +228,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                           ),
                         );
                       }else{
-                        return CircularProgressIndicator();
+                        return Center(child: SizedBox(height: 20, width: 20,child: CircularProgressIndicator()));
                       }
                     },
                   ),
@@ -193,4 +246,10 @@ class GenderStats{
   String gender;
   int number;
   GenderStats(this.gender, this.number);
+}
+
+class ProvinceStats{
+  String province;
+  int value;
+  ProvinceStats(this.province, this.value);
 }

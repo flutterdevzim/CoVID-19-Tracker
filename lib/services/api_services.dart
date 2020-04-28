@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:covid_19_tracker/models/countrystats.dart';
 
@@ -22,6 +23,7 @@ class ApiService {
       data = CurrentCases.fromJson(json.decode(response.body)[0]);
     }catch(e){
       print(e);
+      Fluttertoast.showToast(msg: e);
     }
     return data;
   }
@@ -35,6 +37,7 @@ class ApiService {
       date = DateUpdated.fromJson(json.decode(response.body)[0]);
     }catch(e){
       print(e);
+      Fluttertoast.showToast(msg: e);
     }
     return date;
   }
@@ -48,6 +51,7 @@ class ApiService {
       data = CasesBySex.fromJson(json.decode(response.body)[0]);
     }catch(e){
       print(e);
+      Fluttertoast.showToast(msg: e);
     }
     return data;
   }
@@ -64,8 +68,22 @@ class ApiService {
         dataList.add(PositiveCases.fromJson(dt));
       }
     }catch(e){
-      throw(e);
+      Fluttertoast.showToast(msg: e);
     }
     return dataList;
+  }
+
+  Future<ProvinceCases> getProvincesData() async{
+    var url = "$_baseStatsUrl/CasesProvince";
+    var response;
+    ProvinceCases data;
+    try{
+      response = await http.get(url);
+      data = ProvinceCases.fromJson(json.decode(response.body)[0]);
+    }catch(e){
+      print(e);
+      Fluttertoast.showToast(msg: e);
+    }
+    return data;
   }
 }
