@@ -64,6 +64,319 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ],),
               ExpansionTile(
                 title: Text(
+                  "Current Statistics",
+                  style: TextStyle(
+                    color: textColor,
+                  ),
+                ),
+                children: <Widget>[
+                  FutureBuilder(
+                    future: _api.getCurrentCases(),
+                    // ignore: missing_return
+                    builder: (context, snap){
+                      if(snap.hasData){
+                        CurrentCases cases = snap.data;
+                        return Column(
+                          children: <Widget>[
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "TOTAL\nTESTS",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.totalTests}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "POSITIVE\nCASES",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.positiveCases}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "NEGATIVE\nTESTS",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.negativeCases}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "DEATHS",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.deaths}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "IN\nICU",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.icu}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "AVERAGE\nAGE",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.averageAge}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "MEDIAN\nAGE",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.medianAge}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "MINIMUM\nAGE",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.minimumAge}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              elevation: 24.0,
+                              child: Container(
+                                width: 0.9 * _width,
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        "MAXIMUM\nAGE",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${cases.maximumAge}",
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }else{
+                        return Center(child: SizedBox(height: 20, width: 20,child: CircularProgressIndicator()));
+                      }
+                    },
+                  ),
+                ],
+              ),
+              ExpansionTile(
+                title: Text(
                   "Statistics By Gender",
                   style: TextStyle(
                     color: textColor,
@@ -131,6 +444,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   )
                 ],
               ),
+              //TODO: Adjust line gragh here
               ExpansionTile(
                 title: Text(
                   "Statistics By Province",
@@ -192,6 +506,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   ),
                 ],
               ),
+              //TODO: display user info of infected persons accurately
               ExpansionTile(
                 title: Text(
                   "Statistics By Positive Cases",
