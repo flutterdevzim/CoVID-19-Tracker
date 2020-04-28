@@ -7,7 +7,6 @@
 import 'dart:convert';
 
 Stats statsFromJson(String str) => Stats.fromJson(json.decode(str));
-
 String statsToJson(Stats data) => json.encode(data.toJson());
 
 class Stats {
