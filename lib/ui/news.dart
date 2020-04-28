@@ -60,7 +60,7 @@ class NewsList extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                          item[index]['content'],
+                          item[index]['content'] != null ? item[index]['content'] : "",
                           style: TextStyle(
                               color: Colors.white.withOpacity(.7),
                               fontWeight: FontWeight.w400,
@@ -79,29 +79,34 @@ class NewsList extends StatelessWidget {
                               fontSize: 15,
                               fontStyle: FontStyle.italic),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Text('By'),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              item[index]['author'],
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('from'),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              item[index]['source']['name'],
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(.6)),
-                            )
-                          ],
+                        Container(
+                          width: double.infinity,
+                          height: 20,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: <Widget>[
+                              Text('By'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                item[index]['author'] != null ? item[index]['author'] : "n/a",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text('from'),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                item[index]['source']['name'] != null ? item[index]['source']['name'] : "n/a",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(.6)),
+                              )
+                            ],
+                          ),
                         ),
                         RaisedButton(
                           elevation: 5,
