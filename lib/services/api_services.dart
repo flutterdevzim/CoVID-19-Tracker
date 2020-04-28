@@ -52,17 +52,20 @@ class ApiService {
     return data;
   }
 
-  Future<PositiveCases> getPositiveCases() async{
+  Future<List<PositiveCases>> getPositiveCases() async{
     var url = "$_baseStatsUrl/apicase";
     var response;
-//    PositiveCases data;
     var data;
+    var dataList = List<PositiveCases>();
     try{
       response = await http.get(url);
       data = json.decode(response.body);
+      for(var dt in data){
+        dataList.add(PositiveCases.fromJson(dt));
+      }
     }catch(e){
-      print(e);
+      throw(e);
     }
-    return data;
+    return dataList;
   }
 }

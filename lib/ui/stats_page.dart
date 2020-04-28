@@ -78,6 +78,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                         CasesBySex cases = snap.data;
                         return Container(
                           width: 0.9 * _width,
+                          height: 200,
                           decoration: BoxDecoration(
                             color: textColor,
                           ),
@@ -102,19 +103,22 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                     fontSize: 18,
                                   ),
                                 ),
-                                SfCartesianChart(
-                                  primaryXAxis: CategoryAxis(),
-                                  tooltipBehavior: TooltipBehavior(enable: true),
-                                  series: <ChartSeries<GenderStats, String>>[
-                                    BarSeries<GenderStats, String>(
-                                      dataSource: <GenderStats>[
-                                        GenderStats("Male", int.parse(cases.male)),
-                                        GenderStats("Female", int.parse(cases.female)),
-                                      ],
-                                      xValueMapper: (GenderStats stats, _) => stats.gender,
-                                      yValueMapper: (GenderStats stats, _) => stats.number,
-                                    ),
-                                  ],
+                                Expanded(
+                                  child: SfCartesianChart(
+                                    primaryXAxis: CategoryAxis(),
+                                    tooltipBehavior: TooltipBehavior(enable: true),
+                                    series: <ChartSeries<GenderStats, String>>[
+                                      BarSeries<GenderStats, String>(
+                                        dataSource: <GenderStats>[
+                                          GenderStats("Male", int.parse(cases.male)),
+                                          GenderStats("Female", int.parse(cases.female)),
+                                        ],
+                                        xValueMapper: (GenderStats stats, _) => stats.gender,
+                                        yValueMapper: (GenderStats stats, _) => stats.number,
+                                        width: 0.4,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -143,32 +147,38 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   ),
                 ),
                 children: <Widget>[
-//                  FutureBuilder(
-//                    future: _api.getPositiveCases(),
-//                    // ignore: missing_return
-//                    builder: (context, snap){
-//                      if(snap.hasData){
-//                        print(snap.data);
-//                        var cases = snap.data;
-//                        return ListView.builder(
-//                          itemCount: cases.length,
-//                          itemBuilder: (context, index){
-//                            return Container(
-//                              child: Column(
-//                                children: <Widget>[
-//                                  Text(
-//                                    "${cases[index]["city"]}"
-//                                  )
-//                                ],
-//                              ),
-//                            );
-//                          },
-//                        );
-//                      }else{
-//                        return CircularProgressIndicator();
-//                      }
-//                    },
-//                  ),
+                  FutureBuilder(
+                    future: _api.getPositiveCases(),
+                    // ignore: missing_return
+                    builder: (context, snap){
+                      if(snap.hasData){
+                        print(snap.data);
+                        List<PositiveCases> cases = snap.data;
+                        return Container(
+                          height: 200,
+                          width: 0.9 * _width,
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: cases.length,
+                            itemBuilder: (context, index){
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: textColor,
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text("Case ID: ${cases[index].caseId}")
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      }else{
+                        return CircularProgressIndicator();
+                      }
+                    },
+                  ),
                 ],
               ),
             ],

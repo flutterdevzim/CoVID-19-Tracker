@@ -50,7 +50,7 @@ class CasesBySex{
 }
 
 class PositiveCases{
-  String caseId;
+  int caseId;
   String date;
   String age;
   String gender;
@@ -71,7 +71,7 @@ class PositiveCases{
   PositiveCases({this.caseId, this.date, this.age, this.gender, this.city, this.province, this.country, this.currentStatus, this.source, this.symptoms, this.dateOfSymptomsOnset, this.dateOfAdmission, this.dateOfConfirmation, this.underlyingConditions, this.travelHistoryDates, this.travelHistoryLocation, this.dateOfDeath, this.notes});
   factory PositiveCases.fromJson(Map<String, dynamic> json) => PositiveCases(
     caseId: json["caseId"],
-    date: json["date"],
+    date: json["date"].toString(),
     age: json["age"],
     gender: json["gender"],
     city: json["city"],
@@ -80,11 +80,12 @@ class PositiveCases{
     currentStatus: json["currentStatus"],
     source: json["source"],
     symptoms: json["symptoms"],
-    dateOfSymptomsOnset: json["dateOnsetSymptoms"],
-    dateOfAdmission: json["dateAdmission_hospital"],
-    dateOfConfirmation: json["dateConfirmation"],
-    travelHistoryDates: json["travelHistoryDates"],
+    dateOfSymptomsOnset: json["dateOnsetSymptoms"].toString(),
+    dateOfAdmission: json["dateAdmission_hospital"].toString(),
+    dateOfConfirmation: json["dateConfirmation"].toString(),
+    travelHistoryDates: json["travelHistoryDates"].toString(),
     travelHistoryLocation: json["travelHistoryLocation"],
-    notes: json["notes"]
+    notes: json["notes"],
+    underlyingConditions: json["underlyingConditions"]
   );
 }
