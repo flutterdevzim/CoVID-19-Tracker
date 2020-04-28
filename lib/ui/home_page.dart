@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:covid_19_tracker/models/country_stats.dart';
+import 'package:covid_19_tracker/models/countrystats.dart';
 import 'package:covid_19_tracker/services/api_services.dart';
 import 'package:covid_19_tracker/ui/news.dart';
 import 'package:covid_19_tracker/ui/preventative_measures_screen.dart';
@@ -9,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:covid_19_tracker/models/countries.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,39 +26,11 @@ class _HomePageState extends State<HomePage> {
   List<Countries> _countries = Countries.getCountries();
   List<DropdownMenuItem<Countries>> _dropDownMenuItems;
   Countries _country;
+  CurrentCases cases;
 
   @override
   void initState() {
-    _dropDownMenuItems = buildDropDownMenuItems(_countries);
-    _country = _dropDownMenuItems[0].value;
     super.initState();
-  }
-
-  List<DropdownMenuItem<Countries>> buildDropDownMenuItems(List countries) {
-    List<DropdownMenuItem<Countries>> items = List();
-    for (Countries country in countries) {
-      items.add(
-        DropdownMenuItem(
-          value: country,
-          child: Text(
-            country.countryName,
-            style: TextStyle(
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              color: questionsPageBGColor,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ),
-      );
-    }
-    return items;
-  }
-
-  onChangeDropdownItem(Countries country) {
-    setState(() {
-      _country = country;
-    });
   }
 
   @override
@@ -77,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Current outbreak',
+                    'Current Outbreak',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: questionsPageBGColor,
@@ -104,17 +80,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-                right: 10.0,
-              ),
-              child: DropdownButton(
-                value: _country,
-                items: _dropDownMenuItems,
-                onChanged: onChangeDropdownItem,
               ),
             ),
             SizedBox(
@@ -204,11 +169,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             IconButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SelfCheckerScreen()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SelfCheckerScreen()));
                               },
                               icon: Icon(
                                 Icons.chevron_right,
@@ -232,7 +193,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    'Latest Covid-19 News',
+                    'Latest Covid-19 Statistics',
                     style: TextStyle(
                       color: questionsPageBGColor,
                       fontWeight: FontWeight.bold,
@@ -260,23 +221,45 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 10.0,
             ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                  child: Text("Date Updated:"),
+                ),
+                FutureBuilder(
+                  future: _api.getDateUpdated(),
+                  builder: (context, snap){
+                    if(snap.hasData){
+                      DateUpdated date = snap.data;
+                      return Text(
+                          "${date.date}"
+                      );
+                    }else{
+                      return SizedBox(height: 10, width: 10, child: CircularProgressIndicator());
+                    }
+                  },
+                ),
+              ],
+            ),
             FutureBuilder(
-                future: _api.loadCountryStats(_country.countryName),
+                future: _api.getCurrentCases(),
                 builder: (context, snap) {
                   if (snap.hasData) {
-                    _stats = snap.data;
+                    print(snap.data);
+                    cases = snap.data;
                     return Container(
                       height: 140.0,
                       //width: _width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3.0),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      child: ListView(
+                      scrollDirection: Axis.horizontal,
                         children: <Widget>[
                           Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Container(
                               width: 0.270270 * _width,
                               decoration: BoxDecoration(
@@ -291,14 +274,14 @@ class _HomePageState extends State<HomePage> {
                                       height: 25,
                                       width: 25,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFFEEEE1),
+                                          color: Colors.blue.withOpacity(0.2),
                                           shape: BoxShape.circle,
                                           border: Border.all(
-                                            color: Color(0xFFFC9246),
+                                            color: Colors.blue,
                                           )),
                                       child: Icon(
-                                        Icons.add,
-                                        color: Color(0xFFFC9246),
+                                        Icons.text_fields,
+                                        color: Colors.blue,
                                         size: 15,
                                       ),
                                     ),
@@ -309,77 +292,19 @@ class _HomePageState extends State<HomePage> {
                                       child: Column(
                                         children: <Widget>[
                                           Text(
-                                            "${_stats.active}",
+                                            "${cases.totalTests}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 30,
-                                              color: Color(0xFFFC9246),
+                                              color: Colors.blue,
                                             ),
                                           ),
                                           Text(
-                                            "INFECTED",
+                                            "TOTAL TESTS",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.grey,
                                               fontSize: 9,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15.0),
-                            child: Container(
-                              width: 0.270270 * _width,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey.shade300),
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      height: 25,
-                                      width: 25,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFFE2FFEF),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Color(0xFF44B876),
-                                        ),
-                                      ),
-                                      child: Icon(
-                                        Icons.favorite,
-                                        color: Color(0xFF44B876),
-                                        size: 15,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 18,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Text(
-                                            "${_stats.recovered}",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 30,
-                                              color: Color(0xFF44B876),
-                                            ),
-                                          ),
-                                          Text(
-                                            "RECOVERED",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 9,
-                                              color: Colors.grey,
                                             ),
                                           ),
                                         ],
@@ -421,7 +346,7 @@ class _HomePageState extends State<HomePage> {
                                     child: Column(
                                       children: <Widget>[
                                         Text(
-                                          "${_stats.deaths}",
+                                          "${cases.deaths}",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 30,
@@ -440,6 +365,180 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Container(
+                              width: 0.270270 * _width,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 25,
+                                      width: 25,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xFFFEEEE1),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Color(0xFFFC9246),
+                                          )),
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Color(0xFFFC9246),
+                                        size: 15,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 18,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            "${cases.positiveCases}",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30,
+                                              color: Color(0xFFFC9246),
+                                            ),
+                                          ),
+                                          Text(
+                                            "POSITIVE",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.grey,
+                                              fontSize: 9,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Container(
+                              width: 0.270270 * _width,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 25,
+                                      width: 25,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xFFE2FFEF),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Color(0xFF44B876),
+                                          )),
+                                      child: Icon(
+                                        Icons.favorite,
+                                        color: Color(0xFF44B876),
+                                        size: 15,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 18,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            "${cases.negativeCases}",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30,
+                                              color: Color(0xFF44B876),
+                                            ),
+                                          ),
+                                          Text(
+                                            "NEGATIVE",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.grey,
+                                              fontSize: 9,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15.0),
+                            child: Container(
+                              width: 0.270270 * _width,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 25,
+                                      width: 25,
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow.withOpacity(0.2),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.yellow,
+                                        ),
+                                      ),
+                                      child: Icon(
+                                        Icons.error,
+                                        color: Colors.yellow,
+                                        size: 15,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 18,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            "${cases.icu}",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30,
+                                              color: Colors.yellow,
+                                            ),
+                                          ),
+                                          Text(
+                                            "IN ICU",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 9,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
