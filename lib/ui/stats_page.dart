@@ -491,6 +491,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                 Expanded(
                                   child: SfCartesianChart(
                                     primaryXAxis: CategoryAxis(),
+                                    legend: Legend(title: LegendTitle(text: "Provinces")),
                                     title: ChartTitle(text: "Provinces Data",),
                                     tooltipBehavior: TooltipBehavior(enable: true),
                                     series: <ChartSeries<ProvinceStats, String>>[
@@ -499,12 +500,12 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                           ProvinceStats("Byo", int.parse(cases.bulawayo)),
                                           ProvinceStats("Hre", int.parse(cases.harare)),
                                           ProvinceStats("Man", int.parse(cases.manicaland)),
-                                          ProvinceStats("MshC", int.parse(cases.mashonaland_central)),
-                                          ProvinceStats("MshE", int.parse(cases.mashonaland_east)),
-                                          ProvinceStats("MshW", int.parse(cases.mashonaland_west)),
+                                          ProvinceStats("MsC", int.parse(cases.mashonaland_central)),
+                                          ProvinceStats("MsE", int.parse(cases.mashonaland_east)),
+                                          ProvinceStats("MsW", int.parse(cases.mashonaland_west)),
                                           ProvinceStats("Mas", int.parse(cases.masvingo)),
-                                          ProvinceStats("MatN", int.parse(cases.matabeleland_north)),
-                                          ProvinceStats("MatS", int.parse(cases.matabeleland_south)),
+                                          ProvinceStats("MtN", int.parse(cases.matabeleland_north)),
+                                          ProvinceStats("MtS", int.parse(cases.matabeleland_south)),
                                           ProvinceStats("Mid", int.parse(cases.midlands)),
 
                                         ],
@@ -526,7 +527,6 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   ),
                 ],
               ),
-              //TODO: display user info of infected persons accurately
               ExpansionTile(
                 trailing: Icon(isPositiveExpanded == false ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up, color: textColor,),
                 title: Text(
@@ -549,21 +549,90 @@ class _StatisticsPageState extends State<StatisticsPage> {
                         print(snap.data);
                         List<PositiveCases> cases = snap.data;
                         return Container(
-                          height: 170,
-                          width: 0.9 * _width,
+                          height: _height / 2,
+                          width: _width,
                           child: ListView.builder(
                             scrollDirection: Axis.vertical,
                             itemCount: cases.length,
                             itemBuilder: (context, index){
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color: textColor,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text("Case ID: ${cases[index].caseId}")
-                                  ],
+                              return Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Container(
+                                  width: 0.9 * _width,
+                                  decoration: BoxDecoration(
+                                    color: textColor,
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          "Positive Case No. ${cases[index].caseId}",
+                                          style: TextStyle(
+                                            color: darkColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Divider(color: darkColor,),
+                                        Text(
+                                          "Date: ${cases[index].date}",
+                                          style: TextStyle(
+                                            color: darkColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          "Age: ${cases[index].age}",
+                                        ),
+                                        Text(
+                                          "Gender: ${cases[index].gender}",
+                                        ),
+                                        Text(
+                                          "City: ${cases[index].city}",
+                                        ),
+                                        Text(
+                                          "Province: ${cases[index].province}",
+                                        ),
+                                        Text(
+                                          "Country: ${cases[index].country}",
+                                        ),
+                                        Text(
+                                          "Current Status: ${cases[index].currentStatus}",
+                                        ),
+                                        Text(
+                                          "Source: ${cases[index].source}",
+                                        ),
+                                        Text(
+                                          "Symptoms: ${cases[index].symptoms}",
+                                        ),
+                                        Text(
+                                          "Date of symptoms onset: ${cases[index].dateOfSymptomsOnset}",
+                                        ),
+                                        Text(
+                                          "Date of admission: ${cases[index].dateOfAdmission}",
+                                        ),
+                                        Text(
+                                          "Date of confirmation: ${cases[index].dateOfConfirmation}",
+                                        ),
+                                        Text(
+                                          "Underlying Conditions: ${cases[index].underlyingConditions}",
+                                        ),
+                                        Text(
+                                          "Travel History Dates: ${cases[index].travelHistoryDates}",
+                                        ),
+                                        Text(
+                                          "Travel History Location: ${cases[index].travelHistoryLocation}",
+                                        ),
+                                        Text(
+                                          "Date of death: ${cases[index].dateOfDeath}",
+                                        ),
+                                        Text(
+                                          "Relevant Notes: ${cases[index].notes}",
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               );
                             },
