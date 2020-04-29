@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:covid_19_tracker/models/country_stats.dart';
 import 'package:covid_19_tracker/models/donation_summary.dart';
 import 'package:covid_19_tracker/models/donors.dart';
 import 'package:covid_19_tracker/models/faq.dart';
+import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
@@ -27,9 +29,8 @@ class ApiService {
     try{
       response = await http.get(url);
       data = CurrentCases.fromJson(json.decode(response.body)[0]);
-    }catch(e){
-      print(e);
-      Fluttertoast.showToast(msg: e);
+    }on SocketException catch(e){
+      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
     }
     return data;
   }
@@ -309,9 +310,8 @@ class ApiService {
     try{
       response = await http.get(url);
       date = DateUpdated.fromJson(json.decode(response.body)[0]);
-    }catch(e){
-      print(e);
-      Fluttertoast.showToast(msg: e);
+    }on SocketException catch(e){
+      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
     }
     return date;
   }
@@ -323,9 +323,8 @@ class ApiService {
     try{
       response = await http.get(url);
       data = CasesBySex.fromJson(json.decode(response.body)[0]);
-    }catch(e){
-      print(e);
-      Fluttertoast.showToast(msg: e);
+    }on SocketException catch(e){
+      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
     }
     return data;
   }
@@ -341,8 +340,8 @@ class ApiService {
       for(var dt in data){
         dataList.add(PositiveCases.fromJson(dt));
       }
-    }catch(e){
-      Fluttertoast.showToast(msg: e);
+    }on SocketException catch(e){
+      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
     }
     return dataList;
   }
@@ -354,11 +353,9 @@ class ApiService {
     try{
       response = await http.get(url);
       data = ProvinceCases.fromJson(json.decode(response.body)[0]);
-    }catch(e){
-      print(e);
-      Fluttertoast.showToast(msg: e);
+    }on SocketException catch(e){
+      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
     }
     return data;
-
   }
 }

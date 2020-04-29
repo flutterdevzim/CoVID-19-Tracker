@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:covid_19_tracker/models/country_stats.dart';
 import 'package:covid_19_tracker/models/countrystats.dart';
 import 'package:covid_19_tracker/services/api_services.dart';
+import 'package:covid_19_tracker/ui/about.dart';
 import 'package:covid_19_tracker/ui/news.dart';
 import 'package:covid_19_tracker/ui/preventative_measures_screen.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
@@ -63,11 +64,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
-
                     child: Icon(
                       Icons.info,
                       color: Colors.grey,
-                      size: 38.5,
+                      size: 30,
                     ),
 
                   ), onTap: () {
