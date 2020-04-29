@@ -1,4 +1,3 @@
-import 'package:covid_19_tracker/models/country_stats.dart';
 import 'package:covid_19_tracker/models/countrystats.dart';
 import 'package:covid_19_tracker/services/api_services.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
@@ -6,7 +5,6 @@ import 'package:covid_19_tracker/ui/stats_page.dart';
 import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:covid_19_tracker/widgets/stats_shimmer.dart';
 import 'package:flutter/material.dart';
-import 'package:covid_19_tracker/models/countries.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -286,7 +284,8 @@ class _HomePageState extends State<HomePage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Container(
-                              width: 0.270270 * _width,
+                              //width: 0.270270 * _width,
+                              width: 120,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey.shade300),
                                 borderRadius: BorderRadius.circular(5.0),
@@ -341,7 +340,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Container(
-                            width: 0.270270 * _width,
+                            //width: 0.270270 * _width,
+                            width: 120,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey.shade300),
                               borderRadius: BorderRadius.circular(5.0),
@@ -396,7 +396,8 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Container(
-                              width: 0.270270 * _width,
+                              //width: 0.270270 * _width,
+                              width: 120,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey.shade300),
                                 borderRadius: BorderRadius.circular(5.0),
@@ -454,7 +455,8 @@ class _HomePageState extends State<HomePage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Container(
-                              width: 0.270270 * _width,
+                              //width: 0.270270 * _width,
+                              width: 120,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey.shade300),
                                 borderRadius: BorderRadius.circular(5.0),
@@ -511,7 +513,8 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.only(right: 15.0),
                             child: Container(
-                              width: 0.270270 * _width,
+                              //width: 0.270270 * _width,
+                              width: 120,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey.shade300),
                                 borderRadius: BorderRadius.circular(5.0),
@@ -584,24 +587,30 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    'Global Cases',
+                    'Active Cases',
                     style: TextStyle(
                       color: questionsPageBGColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
                     ),
                   ),
-                  Spacer(),
-                  // TODO: add graph
-                  FutureBuilder(
-                    future: _api.getStatsForGraph(),
-                    // ignore: missing_return
-                    builder: (context, snap){
-
-                    },
-                  )
                 ],
               ),
+            ),
+            FutureBuilder(
+              future: _api.getStatsForGraph(),
+              // ignore: missing_return
+              // TODO: Add proper return
+              builder: (context, snap) {
+                return Container(
+                  height: 120,
+                  child: Center(
+                    child: Text(
+                      'Stats for Graph',
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

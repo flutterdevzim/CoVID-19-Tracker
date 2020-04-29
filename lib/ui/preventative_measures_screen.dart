@@ -4,10 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:covid_19_tracker/utils/constants.dart';
 
 final List<String> imgList = [
-  'assets/images/hand-wash.jpeg',
+  'assets/images/hand_wash.png',
   'assets/images/human_contact.png',
-  'assets/images/prevent_corona_small.png',
-  'assets/images/air.png',
+  'assets/images/no_touch.png',
+  'assets/images/cough.png',
   'assets/images/doctor_patient.png'
 ];
 
@@ -119,7 +119,7 @@ class _PreventativeMeasuresScreenState
                     ),
                     Positioned(
                       left: 20.0,
-                      bottom: 25.0,
+                      bottom: 5.0,
                       child: Image.asset(
                         'assets/images/doctor.png',
                         height: 100.0,
@@ -130,13 +130,13 @@ class _PreventativeMeasuresScreenState
                       bottom: 70.0,
                       child: Image.asset(
                         'assets/images/stop_covid.png',
-                        height: 50.0,
-                        width: 50.0,
+                        height: 45.0,
+                        width: 45.0,
                       ),
                     ),
                     Positioned(
-                      bottom: 90.0,
-                      right: 35.0,
+                      bottom: 75.0,
+                      right: 20.0,
                       child: Text(
                         'All you need to\n do is stay at home.',
                         style: TextStyle(
@@ -149,12 +149,19 @@ class _PreventativeMeasuresScreenState
                   ],
                 ),
               ),
-              Text(
-                'Take steps to protect yourself and others',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10.0,
+                  right: 10.0,
+                  top: 7,
+                ),
+                child: Text(
+                  'Take steps to protect yourself and others',
+                  style: TextStyle(
+                    color: questionsPageBGColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
               ),
               SizedBox(
