@@ -50,7 +50,7 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                   SizedBox(
                     width: 0.82* MediaQuery.of(context).size.width,
                     child: StepProgressIndicator(
-                      totalSteps: 5,
+                      totalSteps: 8,
                       currentStep: selfCheckerBrain.getQuestionNumber(),
                       size: 6,
                       padding: 0,
@@ -119,19 +119,22 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                           SizedBox(
                             width: 150,
                             height: 50,
-                            child: FlatButton(
-                              onPressed: () {
-                                //Choice 2 made by user.
-                                setState(() {
-                                  selfCheckerBrain.nextSelfChecker(2);
-                                });
-                              },
-                              color: Color(0xFF212b46),
-                              child: Text(
-                                selfCheckerBrain.getAnswer2(),
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.white,
+                            child: Visibility(
+                              visible: selfCheckerBrain.buttonShouldBeVisible(),
+                              child: FlatButton(
+                                onPressed: () {
+                                  //Choice 2 made by user.
+                                  setState(() {
+                                    selfCheckerBrain.nextSelfChecker(2);
+                                  });
+                                },
+                                color: Color(0xFF212b46),
+                                child: Text(
+                                  selfCheckerBrain.getAnswer2(),
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
