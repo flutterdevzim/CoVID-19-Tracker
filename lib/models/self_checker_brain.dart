@@ -2,6 +2,7 @@ import 'self_checker_model.dart';
 
 class SelfCheckerBrain {
   int _questionNumber = 0;
+  int _yesCounter = 0;
 
   List<SelfChecker> _selfCheckerData = [
     SelfChecker(
@@ -32,7 +33,23 @@ class SelfCheckerBrain {
     SelfChecker(
         selfCheckQuestion: 'Do you live or work in a care facility?',
         answer1: 'No',
-        answer2: 'Yes')
+        answer2: 'Yes'),
+    SelfChecker(
+        selfCheckQuestion:
+        'Show Results?',
+        answer1: 'No',
+        answer2: 'Yes'),
+    SelfChecker(
+        selfCheckQuestion:
+        'Based on your answers, it would be good to seek medical attention immediately. '
+            'Please use the emergency numbers on the Hotline Page',
+        answer1: 'Restart',
+        answer2: ''),
+    SelfChecker(
+        selfCheckQuestion:
+        'You dont seem to be infected, however please continue to follow prevention guidelines.',
+        answer1: 'Restart',
+        answer2: ''),
   ];
 
   String getSelfChecker() {
@@ -53,20 +70,44 @@ class SelfCheckerBrain {
 
   void nextSelfChecker(int choiceNumber) {
     if (choiceNumber == 1 && _questionNumber == 0) {
-      _questionNumber = 1;
+      _questionNumber++;
+      _yesCounter++;
     } else if (choiceNumber == 2 && _questionNumber == 0) {
-      _questionNumber = 1;
+      _questionNumber++;
     } else if (choiceNumber == 1 && _questionNumber == 1) {
-      _questionNumber = 2;
+      _questionNumber++;
     } else if (choiceNumber == 2 && _questionNumber == 1) {
-      _questionNumber = 2;
+      _questionNumber++;
+      _yesCounter++;
     } else if (choiceNumber == 1 && _questionNumber == 2) {
-      _questionNumber = 5;
+      _questionNumber++;
     } else if (choiceNumber == 2 && _questionNumber == 2) {
-      _questionNumber = 4;
-    } else if (_questionNumber == 3 ||
-        _questionNumber == 4 ||
-        _questionNumber == 5) {
+      _questionNumber++;
+      _yesCounter++;
+    } else if (choiceNumber == 1 && _questionNumber == 3) {
+      _questionNumber++;
+    } else if (choiceNumber == 2 && _questionNumber == 3) {
+      _questionNumber++;
+      _yesCounter++;
+    } else if (choiceNumber == 1 && _questionNumber == 4) {
+      _questionNumber++;
+    } else if (choiceNumber == 2 && _questionNumber == 4) {
+      _questionNumber++;
+      _yesCounter++;
+    } else if (choiceNumber == 1 && _questionNumber == 5) {
+      _questionNumber++;
+    } else if (choiceNumber == 2 && _questionNumber == 5) {
+      _questionNumber++;
+      _yesCounter++;
+    } else if (choiceNumber == 1 && _questionNumber == 6) {
+      restart();
+    } else if (choiceNumber == 2 && _questionNumber == 6 && _yesCounter > 3) {
+      _questionNumber = 7;
+    } else if (choiceNumber == 2 && _questionNumber == 6 && _yesCounter <= 3) {
+      _questionNumber = 8;
+    } else if (choiceNumber == 1 && _questionNumber == 7) {
+      restart();
+    } else if (choiceNumber == 1 && _questionNumber == 8) {
       restart();
     }
   }
@@ -78,6 +119,14 @@ class SelfCheckerBrain {
       return true;
     } else if (_questionNumber == 2) {
       return true;
+    } else if (_questionNumber == 3) {
+      return true;
+    } else if (_questionNumber == 4) {
+      return true;
+    } else if (_questionNumber == 5) {
+      return true;
+    } else if (_questionNumber == 6) {
+      return true;
     } else {
       return false;
     }
@@ -85,5 +134,6 @@ class SelfCheckerBrain {
 
   void restart() {
     _questionNumber = 0;
+    _yesCounter = 0;
   }
 }
