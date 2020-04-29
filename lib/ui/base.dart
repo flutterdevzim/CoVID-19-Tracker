@@ -1,7 +1,7 @@
 import 'package:covid_19_tracker/ui/donate_page.dart';
 import 'package:covid_19_tracker/ui/home_page.dart';
 import 'package:covid_19_tracker/ui/hotline_screen.dart';
-import 'package:covid_19_tracker/ui/news.dart';
+import 'package:covid_19_tracker/ui/news_page.dart';
 import 'package:covid_19_tracker/ui/preventative_measures_screen.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class _BaseState extends State<Base> {
     HomePage(),
     PreventativeMeasuresScreen(),
     HotlineScreen(),
-    NewsList(),
+    Newspage(),
     DonatePage()
   ];
 

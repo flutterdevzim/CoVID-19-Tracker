@@ -1,43 +1,52 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:covid_19_tracker/models/country_stats.dart';
 import 'package:covid_19_tracker/models/donation_summary.dart';
 import 'package:covid_19_tracker/models/donors.dart';
 import 'package:covid_19_tracker/models/faq.dart';
+import 'package:covid_19_tracker/models/hackathon_news.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:covid_19_tracker/models/countrystats.dart';
 
 class ApiService {
+  final String _baseNewsUrl =
+      'https://flutterdevzw.herokuapp.com//v1/hackathon/news';
+  final String _baseStatsUrl = 'https://crnzwhack.herokuapp.com';
 
-  final String _baseNewsUrl     = 'https://cvtrackerzw.herokuapp.com/news';
-  final String _baseStatsUrl    = 'https://crnzwhack.herokuapp.com';
-
-  Future<List> loadNews() async {
+  Future loadNews() async {
     // get data
-    final response = await http.get(_baseNewsUrl);
-    final data = jsonDecode(response.body);
-    return data['articles'];
+    try {
+      final response = await http.get(_baseNewsUrl);
+      final news = newsFromJson(response.body);
+      return news;
+    } catch (e) {
+      // error
+      Fluttertoast.showToast(
+          msg: "Check your internet connection\nor try again",
+          textColor: darkColor,
+          backgroundColor: textColor);
+    }
   }
 
-  Future<CurrentCases> getCurrentCases() async{
+  Future<CurrentCases> getCurrentCases() async {
     var url = "$_baseStatsUrl/UpdateSummary";
     var response;
     CurrentCases data;
-    try{
+    try {
       response = await http.get(url);
       data = CurrentCases.fromJson(json.decode(response.body)[0]);
-    }on SocketException catch(e){
-      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
+    } on SocketException catch (e) {
+      Fluttertoast.showToast(
+          msg: "Check your internet connection",
+          textColor: darkColor,
+          backgroundColor: textColor);
     }
     return data;
   }
 
-
   Future<List<DonationSummary>> getDonationSummary() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
     List<DonationSummary> donationSummary = [
       DonationSummary(
         0,
@@ -88,7 +97,7 @@ class ApiService {
 
   Future<List<FAQ>> getFAQs() async {
     // get all FAQs
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
 
     List<FAQ> faqs = [
       FAQ(
@@ -134,7 +143,7 @@ class ApiService {
 
   Future<List<Donor>> getDonors() async {
     // get all main donors
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
 
     List<Donor> donors = [
       Donor(
@@ -303,58 +312,70 @@ class ApiService {
     return donors;
   }
 
-  Future<DateUpdated> getDateUpdated() async{
+  Future<DateUpdated> getDateUpdated() async {
     var url = "$_baseStatsUrl/dateUpdate";
     var response;
     DateUpdated date;
-    try{
+    try {
       response = await http.get(url);
       date = DateUpdated.fromJson(json.decode(response.body)[0]);
-    }on SocketException catch(e){
-      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
+    } on SocketException catch (e) {
+      Fluttertoast.showToast(
+          msg: "Check your internet connection",
+          textColor: darkColor,
+          backgroundColor: textColor);
     }
     return date;
   }
 
-  Future<CasesBySex> getSexUpdate() async{
+  Future<CasesBySex> getSexUpdate() async {
     var url = "$_baseStatsUrl/sexUpdate";
     var response;
     CasesBySex data;
-    try{
+    try {
       response = await http.get(url);
       data = CasesBySex.fromJson(json.decode(response.body)[0]);
-    }on SocketException catch(e){
-      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
+    } on SocketException catch (e) {
+      Fluttertoast.showToast(
+          msg: "Check your internet connection",
+          textColor: darkColor,
+          backgroundColor: textColor);
     }
     return data;
   }
 
-  Future<List<PositiveCases>> getPositiveCases() async{
+  Future<List<PositiveCases>> getPositiveCases() async {
     var url = "$_baseStatsUrl/apicase";
     var response;
     var data;
     var dataList = List<PositiveCases>();
-    try{
+    try {
       response = await http.get(url);
       data = json.decode(response.body);
-      for(var dt in data){
+      for (var dt in data) {
         dataList.add(PositiveCases.fromJson(dt));
       }
-    }on SocketException catch(e){
-      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
+    } on SocketException catch (e) {
+      Fluttertoast.showToast(
+          msg: "Check your internet connection",
+          textColor: darkColor,
+          backgroundColor: textColor);
     }
     return dataList;
   }
 
-  Future<ProvinceCases> getProvincesData() async{
+  Future<ProvinceCases> getProvincesData() async {
     var url = "$_baseStatsUrl/CasesProvince";
     var response;
     ProvinceCases data;
-    try{
+    try {
       response = await http.get(url);
       data = ProvinceCases.fromJson(json.decode(response.body)[0]);
-    }on SocketException catch(e){
-      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
+    } on SocketException catch (e) {
+      Fluttertoast.showToast(
+          msg: "Check your internet connection",
+          textColor: darkColor,
+          backgroundColor: textColor);
     }
     return data;
   }
