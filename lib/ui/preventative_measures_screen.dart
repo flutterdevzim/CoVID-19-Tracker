@@ -28,8 +28,10 @@ final List<String> infoList = [
 ];
 
 final List carouselImages = map<Widget>(
-  imgList, stepList, infoList,
-      (index, i) {
+  imgList,
+  stepList,
+  infoList,
+  (index, i) {
     return Container(
       height: 200,
       margin: EdgeInsets.all(5.0),
@@ -38,15 +40,19 @@ final List carouselImages = map<Widget>(
           Image.asset(i, fit: BoxFit.fitHeight, width: 200),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(stepList[index],
-                style: Constants.kTitleStyle,),
+            child: Text(
+              stepList[index],
+              style: Constants.kTitleStyle,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               width: 350,
-              child: Text(infoList[index],
-              style: Constants.kSubtitleStyle,),
+              child: Text(
+                infoList[index],
+                style: Constants.kSubtitleStyle,
+              ),
             ),
           )
         ],
@@ -71,7 +77,6 @@ class PreventativeMeasuresScreen extends StatefulWidget {
 
 class _PreventativeMeasuresScreenState
     extends State<PreventativeMeasuresScreen> {
-
   // Step indicator
   int _current = 0;
 
@@ -81,18 +86,18 @@ class _PreventativeMeasuresScreenState
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-        titleSpacing: 0.0,
-        centerTitle: true,
-        leading: _goBackButton(context),
-    title: Text(
-    'Prevention',
-    style: TextStyle(
-    fontSize: 18, fontWeight: FontWeight.w700,
-    color: Colors.white,
-    ),
-    ),
-    backgroundColor: Color(0xFF212b46)
-        ),
+            titleSpacing: 0.0,
+            centerTitle: true,
+            leading: _goBackButton(context),
+            title: Text(
+              'Prevention',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+            backgroundColor: Color(0xFF212b46)),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -172,12 +177,15 @@ class _PreventativeMeasuresScreenState
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: map<Widget>(
-                      imgList, stepList, infoList,
-                          (index, url) {
+                      imgList,
+                      stepList,
+                      infoList,
+                      (index, url) {
                         return Container(
                           width: 8.0,
                           height: 8.0,
-                          margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+                          margin: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 2.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: _current == index

@@ -1,20 +1,13 @@
-import 'dart:convert';
-
 import 'package:covid_19_tracker/models/country_stats.dart';
 import 'package:covid_19_tracker/models/countrystats.dart';
 import 'package:covid_19_tracker/services/api_services.dart';
-import 'package:covid_19_tracker/ui/about.dart';
-import 'package:covid_19_tracker/ui/news.dart';
-import 'package:covid_19_tracker/ui/preventative_measures_screen.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
 import 'package:covid_19_tracker/ui/stats_page.dart';
 import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:covid_19_tracker/widgets/stats_shimmer.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
 import 'package:covid_19_tracker/models/countries.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,10 +17,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _date = new DateHelper();
   final _api = new ApiService();
-  Stats _stats;
-  List<Countries> _countries = Countries.getCountries();
-  List<DropdownMenuItem<Countries>> _dropDownMenuItems;
-  Countries _country;
   CurrentCases cases;
 
   @override
@@ -46,42 +35,57 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(
-                top: 25.0,
+                top: 5.0,
                 right: 10.0,
                 left: 10.0,
               ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Current Outbreak',
+                    'CoVID-19 Outbreak',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: questionsPageBGColor,
                       fontSize: 18,
                     ),
                   ),
-                  GestureDetector(child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Icon(
-                      Icons.info,
-                      color: Colors.grey,
-                      size: 30,
+                  GestureDetector(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Icon(
+                        Icons.info,
+                        color: Colors.grey,
+                        size: 30,
+                      ),
                     ),
-
-                  ), onTap: () {
-                    /*Navigator.push(
+                    onTap: () {
+                      /*Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => AboutPage()));*/
-                  },
+                    },
                   ),
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 10.0,
+                right: 10.0,
+              ),
+              child: Text(
+                'Zimbabwe',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: questionsPageBGColor,
+                  fontSize: 30,
+                ),
+              ),
+            ),
             SizedBox(
-              height: 10.0,
+              height: 5.0,
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -90,8 +94,104 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 '${_date.getDay()}, ${_date.getDate()} ${_date.getMonth()} ${_date.getYear()}',
                 style: TextStyle(
-                  color: Color(0xFFA4ACC3),
+                  color: Colors.black.withOpacity(0.6),
                   fontSize: 15,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 10.0,
+                right: 10.0,
+              ),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SelfCheckerScreen()));
+                },
+                child: Card(
+                  elevation: 24.0,
+                  child: Container(
+                    height: 135.0,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: questionsPageBGColor.withOpacity(0.9),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5.0),
+                          bottomLeft: Radius.circular(5.0),
+                          topRight: Radius.circular(5.0),
+                          bottomRight: Radius.circular(5.0)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 2.0,
+                          offset: Offset(0.0, 1.0),
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.4),
+                          blurRadius: 2.0,
+                          offset: Offset(0.0, 2.0),
+                        ),
+                      ],
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          right: 25,
+                          child: Image.asset(
+                            'assets/images/corona1.png',
+                            color: Colors.red,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        Positioned(
+                          top: 21.0,
+                          left: 35.0,
+                          child: Row(
+                            children: <Widget>[
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    'Safe Check Up Covid-19',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Text(
+                                    'Contain several list of questions to check\nyour physical condition.',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 0.125 * _width,
+                              ),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Colors.white,
+                                size: 50.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -99,99 +199,11 @@ class _HomePageState extends State<HomePage> {
               height: 25.0,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-                right: 10.0,
-              ),
-              child: Card(
-                elevation: 24.0,
-                child: Container(
-                  height: 135.0,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: questionsPageBGColor.withOpacity(0.9),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5.0),
-                        bottomLeft: Radius.circular(5.0),
-                        topRight: Radius.circular(5.0),
-                        bottomRight: Radius.circular(5.0)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 2.0,
-                        offset: Offset(0.0, 1.0),
-                      ),
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.4),
-                        blurRadius: 2.0,
-                        offset: Offset(0.0, 2.0),
-                      ),
-                    ],
-                  ),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/corona1.png',
-                        color: Colors.red,
-                      ),
-                      Positioned(
-                        top: 30.0,
-                        left: 60.0,
-                        child: Row(
-                          children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'Safe Check Up Covid-19',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                Text(
-                                  'Contain several list of questions to check\nyour physical condition.',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 11.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 0.125 * _width,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => SelfCheckerScreen()));
-                              },
-                              icon: Icon(
-                                Icons.chevron_right,
-                                color: Colors.white,
-                                size: 50.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0),
               child: Row(
                 children: <Widget>[
                   Text(
-                    'Latest Covid-19 Statistics',
+                    'Statistics',
                     style: TextStyle(
                       color: questionsPageBGColor,
                       fontWeight: FontWeight.bold,
@@ -200,12 +212,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => StatisticsPage())),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => StatisticsPage())),
                     child: Text(
-                      'More Stats',
+                      'View all',
                       style: TextStyle(
                         color: Colors.blue,
-                        fontSize: 12.0,
+                        fontSize: 15.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -213,25 +228,40 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 10.0,
-            ),
             Row(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
-                  child: Text("Date Updated:"),
+                  padding: EdgeInsets.only(
+                    left: 15.0,
+                    right: 15.0,
+                    bottom: 5.0,
+                  ),
+                  child: Text(
+                    "Date Updated:",
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.6),
+                      fontSize: 11,
+                    ),
+                  ),
                 ),
                 FutureBuilder(
                   future: _api.getDateUpdated(),
-                  builder: (context, snap){
-                    if(snap.hasData){
+                  builder: (context, snap) {
+                    if (snap.hasData) {
                       DateUpdated date = snap.data;
                       return Text(
-                          "${date.date}"
+                        "${date.date}",
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.6),
+                          fontSize: 11,
+                        ),
                       );
-                    }else{
-                      return SizedBox(height: 10, width: 10, child: CircularProgressIndicator());
+                    } else {
+                      return SizedBox(
+                        height: 10,
+                        width: 10,
+                        child: CircularProgressIndicator(),
+                      );
                     }
                   },
                 ),
@@ -250,11 +280,11 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(3.0),
                       ),
                       child: ListView(
-                      scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.horizontal,
                         children: <Widget>[
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 15.0),
+                                const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Container(
                               width: 0.270270 * _width,
                               decoration: BoxDecoration(
@@ -364,8 +394,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.only(left: 15.0),
+                            padding: const EdgeInsets.only(left: 15.0),
                             child: Container(
                               width: 0.270270 * _width,
                               decoration: BoxDecoration(
@@ -423,7 +452,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 15.0),
+                                const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Container(
                               width: 0.270270 * _width,
                               decoration: BoxDecoration(
@@ -555,7 +584,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    'Active Cases',
+                    'Global Cases',
                     style: TextStyle(
                       color: questionsPageBGColor,
                       fontWeight: FontWeight.bold,
