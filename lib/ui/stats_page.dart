@@ -575,12 +575,12 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                           ),
                                         ),
                                         Divider(color: darkColor,),
-                                        Text(
+                                        cases[index].date != "null" ? Text(
                                           "Date: ${cases[index].date}",
                                           style: TextStyle(
                                             color: darkColor,
                                           ),
-                                        ),
+                                        ) : Container(height: 0, width: 0),
                                         Text(
                                           "Age: ${cases[index].age}",
                                         ),
@@ -602,33 +602,33 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                         Text(
                                           "Source: ${cases[index].source}",
                                         ),
-                                        Text(
+                                        cases[index].symptoms != "null" ? Text(
                                           "Symptoms: ${cases[index].symptoms}",
-                                        ),
-                                        Text(
+                                        ) : Container(height: 0, width: 0),
+                                        cases[index].dateOfSymptomsOnset != "null" ? Text(
                                           "Date of symptoms onset: ${cases[index].dateOfSymptomsOnset}",
-                                        ),
-                                        Text(
+                                        ) : Container(height: 0, width: 0),
+                                        cases[index].dateOfAdmission != "null" ? Text(
                                           "Date of admission: ${cases[index].dateOfAdmission}",
-                                        ),
+                                        ) : Container(height: 0, width: 0),
                                         Text(
                                           "Date of confirmation: ${cases[index].dateOfConfirmation}",
                                         ),
-                                        Text(
+                                        cases[index].underlyingConditions != "null" ? Text(
                                           "Underlying Conditions: ${cases[index].underlyingConditions}",
-                                        ),
-                                        Text(
+                                        ) : Container(height: 0, width: 0),
+                                        cases[index].travelHistoryDates != "null" ? Text(
                                           "Travel History Dates: ${cases[index].travelHistoryDates}",
-                                        ),
+                                        ) : Container(height: 0, width: 0),
                                         Text(
                                           "Travel History Location: ${cases[index].travelHistoryLocation}",
                                         ),
-                                        Text(
+                                        cases[index].dateOfDeath != "null" ? Text(
                                           "Date of death: ${cases[index].dateOfDeath}",
-                                        ),
+                                        ) : Container(height: 0, width: 0),
                                         Text(
                                           "Relevant Notes: ${cases[index].notes}",
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
