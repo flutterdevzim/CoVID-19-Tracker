@@ -591,7 +591,15 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 20.0,
                     ),
                   ),
+                  Spacer(),
                   // TODO: add graph
+                  FutureBuilder(
+                    future: _api.getStatsForGraph(),
+                    // ignore: missing_return
+                    builder: (context, snap){
+
+                    },
+                  )
                 ],
               ),
             ),
