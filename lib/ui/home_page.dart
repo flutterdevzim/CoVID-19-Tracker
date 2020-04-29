@@ -563,16 +563,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Spacer(),
-                  // FIXME: this text below must be a drop drown button
-                  Text(
-                    '18 - 22 Mar',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 11.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                   // TODO: add graph
+                  FutureBuilder(
+                    future: _api.getStatsForGraph(),
+                    // ignore: missing_return
+                    builder: (context, snap){
+
+                    },
+                  )
                 ],
               ),
             ),
