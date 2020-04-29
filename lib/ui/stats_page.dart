@@ -561,7 +561,6 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                   width: 0.9 * _width,
                                   decoration: BoxDecoration(
                                     color: textColor,
-                                    borderRadius: BorderRadius.circular(5.0),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
