@@ -11,6 +11,10 @@ class StatisticsPage extends StatefulWidget {
 
 class _StatisticsPageState extends State<StatisticsPage> {
   final _api = new ApiService();
+  var isCurrentExpanded = false;
+  var isGenderExpanded = false;
+  var isProvinceExpanded = false;
+  var isPositiveExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +66,18 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 ),
               ],),
               ExpansionTile(
+                trailing: Icon(isCurrentExpanded == false ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up, color: textColor,),
                 title: Text(
                   "Current Statistics",
                   style: TextStyle(
                     color: textColor,
                   ),
                 ),
+                onExpansionChanged: (value){
+                  setState((){
+                    isCurrentExpanded = value;
+                  });
+                },
                 children: <Widget>[
                   FutureBuilder(
                     future: _api.getCurrentCases(),
@@ -375,12 +385,18 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 ],
               ),
               ExpansionTile(
+                trailing: Icon(isGenderExpanded == false ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up, color: textColor,),
                 title: Text(
                   "Statistics By Gender",
                   style: TextStyle(
                     color: textColor,
                   ),
                 ),
+                onExpansionChanged: (value){
+                  setState((){
+                    isGenderExpanded = value;
+                  });
+                },
                 children: <Widget>[
                   FutureBuilder(
                     future: _api.getSexUpdate(),
@@ -443,14 +459,19 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   )
                 ],
               ),
-              //TODO: Adjust line gragh here
               ExpansionTile(
+                trailing: Icon(isProvinceExpanded == false ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up, color: textColor,),
                 title: Text(
                   "Statistics By Province",
                   style: TextStyle(
                     color: textColor,
                   ),
                 ),
+                onExpansionChanged: (value){
+                  setState((){
+                    isProvinceExpanded = value;
+                  });
+                },
                 children: <Widget>[
                   FutureBuilder(
                     future: _api.getProvincesData(),
@@ -477,11 +498,11 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                         dataSource: <ProvinceStats>[
                                           ProvinceStats("Byo", int.parse(cases.bulawayo)),
                                           ProvinceStats("Hre", int.parse(cases.harare)),
-                                          ProvinceStats("Manica", int.parse(cases.manicaland)),
-                                          ProvinceStats("MashC", int.parse(cases.mashonaland_central)),
-                                          ProvinceStats("MashE", int.parse(cases.mashonaland_east)),
-                                          ProvinceStats("MashW", int.parse(cases.mashonaland_west)),
-                                          ProvinceStats("Masv", int.parse(cases.masvingo)),
+                                          ProvinceStats("Man", int.parse(cases.manicaland)),
+                                          ProvinceStats("MshC", int.parse(cases.mashonaland_central)),
+                                          ProvinceStats("MshE", int.parse(cases.mashonaland_east)),
+                                          ProvinceStats("MshW", int.parse(cases.mashonaland_west)),
+                                          ProvinceStats("Mas", int.parse(cases.masvingo)),
                                           ProvinceStats("MatN", int.parse(cases.matabeleland_north)),
                                           ProvinceStats("MatS", int.parse(cases.matabeleland_south)),
                                           ProvinceStats("Mid", int.parse(cases.midlands)),
@@ -507,12 +528,18 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ),
               //TODO: display user info of infected persons accurately
               ExpansionTile(
+                trailing: Icon(isPositiveExpanded == false ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up, color: textColor,),
                 title: Text(
                   "Statistics By Positive Cases",
                   style: TextStyle(
                     color: textColor,
                   ),
                 ),
+                onExpansionChanged: (value){
+                  setState((){
+                    isPositiveExpanded = value;
+                  });
+                },
                 children: <Widget>[
                   FutureBuilder(
                     future: _api.getPositiveCases(),
@@ -533,6 +560,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                                   color: textColor,
                                 ),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text("Case ID: ${cases[index].caseId}")
                                   ],
