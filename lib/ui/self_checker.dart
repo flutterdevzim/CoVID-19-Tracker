@@ -48,7 +48,7 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   SizedBox(
-                    width: 0.82* MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.width / 1.3,
                     child: StepProgressIndicator(
                       totalSteps: 8,
                       currentStep: selfCheckerBrain.getQuestionNumber(),
@@ -93,9 +93,7 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(
-                            width: 150,
-                            height: 50,
+                          Expanded(
                             child: FlatButton(
                               onPressed: () {
                                 setState(() {
@@ -116,9 +114,7 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                           SizedBox(
                             width: 10,
                           ),
-                          SizedBox(
-                            width: 150,
-                            height: 50,
+                          Expanded(
                             child: Visibility(
                               visible: selfCheckerBrain.buttonShouldBeVisible(),
                               child: FlatButton(

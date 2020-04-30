@@ -1,7 +1,4 @@
 import 'package:covid_19_tracker/ui/base.dart';
-import 'package:covid_19_tracker/ui/donate_page.dart';
-import 'package:covid_19_tracker/ui/home_page.dart';
-import 'package:covid_19_tracker/ui/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:flutter/services.dart';
@@ -19,9 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'CoVID-19 App',
       debugShowCheckedModeBanner: false,
       theme: colorTheme,
-      //home: HomePage(),
       home: Base(),
-//      home: StartScreen(),
     );
   }
 }

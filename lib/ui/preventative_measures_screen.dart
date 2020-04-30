@@ -4,10 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:covid_19_tracker/utils/constants.dart';
 
 final List<String> imgList = [
-  'assets/images/hand-wash.jpeg',
+  'assets/images/hand_wash.png',
   'assets/images/human_contact.png',
-  'assets/images/prevent_corona_small.png',
-  'assets/images/air.png',
+  'assets/images/no_touch.png',
+  'assets/images/cough.png',
   'assets/images/doctor_patient.png'
 ];
 
@@ -28,28 +28,35 @@ final List<String> infoList = [
 ];
 
 final List carouselImages = map<Widget>(
-  imgList, stepList, infoList,
-      (index, i) {
-    return Container(
-      height: 200,
-      margin: EdgeInsets.all(5.0),
-      child: Column(
-        children: <Widget>[
-          Image.asset(i, fit: BoxFit.fitHeight, width: 200),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(stepList[index],
-                style: Constants.kTitleStyle,),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: 350,
-              child: Text(infoList[index],
-              style: Constants.kSubtitleStyle,),
+  imgList,
+  stepList,
+  infoList,
+  (index, i) {
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.all(5.0),
+        child: Column(
+          children: <Widget>[
+            Image.asset(i, fit: BoxFit.fitHeight, width: 200),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                stepList[index],
+                style: Constants.kTitleStyle,
+              ),
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 350,
+                child: Text(
+                  infoList[index],
+                  style: Constants.kSubtitleStyle,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   },
@@ -71,7 +78,6 @@ class PreventativeMeasuresScreen extends StatefulWidget {
 
 class _PreventativeMeasuresScreenState
     extends State<PreventativeMeasuresScreen> {
-
   // Step indicator
   int _current = 0;
 
@@ -81,18 +87,17 @@ class _PreventativeMeasuresScreenState
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-        titleSpacing: 0.0,
-        centerTitle: true,
-        leading: _goBackButton(context),
-    title: Text(
-    'Prevention',
-    style: TextStyle(
-    fontSize: 18, fontWeight: FontWeight.w700,
-    color: Colors.white,
-    ),
-    ),
-    backgroundColor: Color(0xFF212b46)
-        ),
+            titleSpacing: 0.0,
+            centerTitle: true,
+            title: Text(
+              'Prevention',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+            backgroundColor: Color(0xFF212b46)),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -114,7 +119,7 @@ class _PreventativeMeasuresScreenState
                     ),
                     Positioned(
                       left: 20.0,
-                      bottom: 25.0,
+                      bottom: 5.0,
                       child: Image.asset(
                         'assets/images/doctor.png',
                         height: 100.0,
@@ -125,13 +130,13 @@ class _PreventativeMeasuresScreenState
                       bottom: 70.0,
                       child: Image.asset(
                         'assets/images/stop_covid.png',
-                        height: 50.0,
-                        width: 50.0,
+                        height: 45.0,
+                        width: 45.0,
                       ),
                     ),
                     Positioned(
-                      bottom: 90.0,
-                      right: 35.0,
+                      bottom: 75.0,
+                      right: 20.0,
                       child: Text(
                         'All you need to\n do is stay at home.',
                         style: TextStyle(
@@ -144,12 +149,19 @@ class _PreventativeMeasuresScreenState
                   ],
                 ),
               ),
-              Text(
-                'Take steps to protect yourself and others',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10.0,
+                  right: 10.0,
+                  top: 7,
+                ),
+                child: Text(
+                  'Take steps to protect yourself and others',
+                  style: TextStyle(
+                    color: questionsPageBGColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
               ),
               SizedBox(
@@ -172,12 +184,15 @@ class _PreventativeMeasuresScreenState
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: map<Widget>(
-                      imgList, stepList, infoList,
-                          (index, url) {
+                      imgList,
+                      stepList,
+                      infoList,
+                      (index, url) {
                         return Container(
                           width: 8.0,
                           height: 8.0,
-                          margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+                          margin: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 2.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: _current == index
@@ -212,12 +227,4 @@ class CustomClipPath extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
-
-Widget _goBackButton(BuildContext context) {
-  return IconButton(
-      icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-      onPressed: () {
-        Navigator.of(context).pop(true);
-      });
 }

@@ -90,6 +90,7 @@ class PositiveCases{
   );
 }
 
+
 class GraphStats{
   String country;
   String countryCode;
@@ -98,11 +99,14 @@ class GraphStats{
   String cityCode;
   String lat;
   String lon;
+
   int confirmed;
   int deaths;
   int recovered;
   int active;
   String date;
+  
   GraphStats({this.country, this.countryCode, this.province, this.city, this.cityCode, this.lat, this.lon, this.confirmed, this.deaths, this.recovered, this.active, this.date});
   factory GraphStats.fromJson(Map<String, dynamic> json) => GraphStats(confirmed: json["Confirmed"], deaths: json["Deaths"], recovered: json["Recovered"], active: json["Active"], date: json["Date"], country: json["Country"], countryCode: json["CountryCode"], province: json["Province"], city: json["City"], cityCode: json["CityCode"], lat: json["Lat"], lon: json["Lon"]);
+
 }
