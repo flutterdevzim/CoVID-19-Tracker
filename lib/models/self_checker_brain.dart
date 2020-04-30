@@ -7,7 +7,7 @@ class SelfCheckerBrain {
   List<SelfChecker> _selfCheckerData = [
     SelfChecker(
         selfCheckQuestion:
-            'By using this tool, you agree to its terms and that Flutter Zimbabwe will not be liable for any harm relating to your use.',
+            'By using this tool, you agree to its terms and conditions,we will not be liable for any harm relating to your use.',
         answer1: 'I Agree',
         answer2: 'Cancel'),
     SelfChecker(
