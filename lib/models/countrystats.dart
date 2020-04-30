@@ -89,13 +89,3 @@ class PositiveCases{
     underlyingConditions: json["underlyingConditions"]
   );
 }
-
-class CntryStats{
-  int confirmed;
-  int deaths;
-  int recovered;
-  int active;
-  String date;
-  CntryStats({this.confirmed, this.deaths, this.recovered, this.active, this.date});
-  factory CntryStats.fromJson(Map<String, dynamic> json) => CntryStats(confirmed: json["Confirmed"], deaths: json["Deaths"], recovered: json["Recovered"], active: json["Active"], date: json["Date"]);
-}

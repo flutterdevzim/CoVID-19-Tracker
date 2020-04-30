@@ -7,6 +7,7 @@ import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:covid_19_tracker/widgets/stats_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -594,7 +595,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    'Active Cases',
+                    'Province Statistics',
                     style: TextStyle(
                       color: questionsPageBGColor,
                       fontWeight: FontWeight.bold,
@@ -605,18 +606,53 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             FutureBuilder(
-              future: _api.getStatsForGraph(),
+              future: _api.getProvincesData(),
               // ignore: missing_return
-              // TODO: Add proper return
-              builder: (context, snap) {
-                return Container(
-                  height: 120,
-                  child: Center(
-                    child: Text(
-                      'Stats for Graph',
+              builder: (context, snap){
+                if(snap.hasData){
+                  ProvinceCases cases = snap.data;
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 170,
+                      decoration: BoxDecoration(
+                        color: textColor,
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: SfCartesianChart(
+                              primaryXAxis: CategoryAxis(),
+                              tooltipBehavior: TooltipBehavior(enable: true),
+                              series: <ChartSeries<ProvinceStats, String>>[
+                                LineSeries<ProvinceStats, String>(
+                                  dataSource: <ProvinceStats>[
+                                    ProvinceStats("Byo", int.parse(cases.bulawayo)),
+                                    ProvinceStats("Hre", int.parse(cases.harare)),
+                                    ProvinceStats("Man", int.parse(cases.manicaland)),
+                                    ProvinceStats("MsC", int.parse(cases.mashonaland_central)),
+                                    ProvinceStats("MsE", int.parse(cases.mashonaland_east)),
+                                    ProvinceStats("MsW", int.parse(cases.mashonaland_west)),
+                                    ProvinceStats("Mas", int.parse(cases.masvingo)),
+                                    ProvinceStats("MtN", int.parse(cases.matabeleland_north)),
+                                    ProvinceStats("MtS", int.parse(cases.matabeleland_south)),
+                                    ProvinceStats("Mid", int.parse(cases.midlands)),
+
+                                  ],
+                                  xValueMapper: (ProvinceStats stats, _) => stats.province,
+                                  yValueMapper: (ProvinceStats stats, _) => stats.value,
+                                  width: 0.4,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }else{
+                  return Center(child: SizedBox(height: 20, width: 20,child: CircularProgressIndicator()));
+                }
               },
             ),
           ],
