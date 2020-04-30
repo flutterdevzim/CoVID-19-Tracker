@@ -8,6 +8,8 @@ import 'package:covid_19_tracker/widgets/stats_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:http/http.dart' as http;
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -174,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 15.0,
                                     ),
                                     Text(
-                                      'Contain several list of questions \nto checkyour physical condition.',
+                                      'Contain several list of questions \nto check your physical condition.',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 13.0,
@@ -661,3 +663,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
