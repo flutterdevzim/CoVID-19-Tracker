@@ -12,17 +12,21 @@ SelfCheckerBrain selfCheckerBrain = SelfCheckerBrain();
 class _SelfCheckerState extends State<SelfCheckerScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0.0,
-        centerTitle: true,
-        leading: _goBackButton(context),
-        title: Text(
-          'Self Check Up',
-          style: TextStyle(
-            fontSize: 23, fontWeight: FontWeight.w700,
-            color: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          centerTitle: true,
+          leading: _goBackButton(context),
+          title: Text(
+            'Self Check Up',
+            style: TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
           ),
+          backgroundColor: Color(0xFF212b46),
         ),
         backgroundColor: Color(0xFF212b46),
       ),
@@ -58,34 +62,19 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                       unselectedColor: Colors.grey,
                     ),
                   ),
-                  Text(
-                    selfCheckerBrain.getQuestionNumber().toString() + "/5",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white),
-                  )
-                ],
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 300,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5.0),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          selfCheckerBrain.getSelfChecker(),
-                          style: TextStyle(
-                              fontSize: 24.0, fontWeight: FontWeight.w600),
-                        ),
+                    SizedBox(
+                      width: 0.82 * MediaQuery.of(context).size.width,
+                      child: StepProgressIndicator(
+                        totalSteps: 8,
+                        currentStep: selfCheckerBrain.getQuestionNumber(),
+                        size: 6,
+                        padding: 0,
+                        selectedColor: Colors.white,
+                        unselectedColor: Colors.grey,
                       ),
                     ),
                     Padding(
@@ -119,14 +108,14 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                               visible: selfCheckerBrain.buttonShouldBeVisible(),
                               child: FlatButton(
                                 onPressed: () {
-                                  //Choice 2 made by user.
                                   setState(() {
-                                    selfCheckerBrain.nextSelfChecker(2);
+                                    //Choice 1 made by user.
+                                    selfCheckerBrain.nextSelfChecker(1);
                                   });
                                 },
                                 color: Color(0xFF212b46),
                                 child: Text(
-                                  selfCheckerBrain.getAnswer2(),
+                                  selfCheckerBrain.getAnswer1(),
                                   style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.white,
@@ -134,14 +123,41 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 10,
+                            ),
+                            SizedBox(
+                              width: 150,
+                              height: 50,
+                              child: Visibility(
+                                visible:
+                                    selfCheckerBrain.buttonShouldBeVisible(),
+                                child: FlatButton(
+                                  onPressed: () {
+                                    //Choice 2 made by user.
+                                    setState(() {
+                                      selfCheckerBrain.nextSelfChecker(2);
+                                    });
+                                  },
+                                  color: Color(0xFF212b46),
+                                  child: Text(
+                                    selfCheckerBrain.getAnswer2(),
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

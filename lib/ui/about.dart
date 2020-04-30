@@ -1,11 +1,8 @@
+import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatefulWidget {
-  AboutPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _AboutPageState createState() => _AboutPageState();
 }
@@ -13,440 +10,367 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.info),
-            onPressed: () {},
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: questionsPageBGColor,
+        appBar: AppBar(
+          backgroundColor: questionsPageBGColor,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-        ],
-        title: Text('ABOUT US'),
-        centerTitle: true,
-      ),
-      body: Container(
-        child: ListView(
-          padding: EdgeInsets.only(top: 0),
+          title: Text(
+            'About',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          centerTitle: true,
+        ),
+        body: ListView(
           children: <Widget>[
-            Card(
-              elevation: 0.0,
-              margin: new EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+            Padding(
+              padding: EdgeInsets.all(8.0),
               child: Container(
-                decoration: BoxDecoration(color: Colors.white),
-                child: ListTile(
-                  contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-                  leading: Container(
-                    child: Image(
-                      fit: BoxFit.contain,
-                      height: 70,
-                      width: 70,
-                      image: AssetImage(
-                        'assets/images/flutter.png',
-                      ),
-                    ),
+                height: 150.0,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 8.0,
                   ),
-                  title: Text(
-                    "FLUTTER DEVS ZIMBABWE",
-                    style: TextStyle(
-                        color: Colors.black54, fontWeight: FontWeight.bold),
-                  ),
-                  // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                  subtitle: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(" IN DART WE TRUST",
-                          style: TextStyle(color: Colors.grey))
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 3.0,
+                          top: 2.0,
+                        ),
+                        child: Text(
+                          'Info',
+                          style: TextStyle(
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.info,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'CoVID-19 Tracker App',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3.0,
+                              ),
+                              Text(
+                                'Easy access to official CoVID-19 information',
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.language,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                launch('https://twitter.com/FlutterZimbabwe'),
+                            child: Text(
+                              'Website',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.perm_device_information,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () => launch('https://www.openparly.co.zw'),
+                            child: Text(
+                              'Data provided by Open Parly',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            InkWell(
-              child: Card(
-                elevation: 10.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      child: Container(
-                        child: Image(
-                          fit: BoxFit.contain,
-                          height: 50,
-                          width: 60,
-                          image: AssetImage(
-                            'assets/images/globe.png',
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                height: 310.0,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 8.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 3.0,
+                          top: 2.0,
+                        ),
+                        child: Text(
+                          'Developers',
+                          style: TextStyle(
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
-                    title: Text(
-                      "WEBSITE",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text("www.fluttedevszim.co.zw",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch('http://flutter.dev/'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      child: Container(
-                        child: Image(
-                          fit: BoxFit.contain,
-                          height: 50,
-                          width: 60,
-                          image: AssetImage(
-                            'assets/images/github.png',
-                          ),
-                        ),
+                      SizedBox(
+                        height: 5.0,
                       ),
-                    ),
-                    title: Text(
-                      "Star on Github",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text("give us a star on github ",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch(
-                  'https://github.com/flutterdevzim/CoVID-19-Tracker/stargazers'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      padding: EdgeInsets.only(right: 12.0),
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              right: new BorderSide(
-                                  width: 4.5, color: Colors.blueGrey))),
-                      child: Icon(Icons.info, color: Colors.black),
-                    ),
-                    title: Text(
-                      "Privacy & Policy",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text(" visit", style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch(
-                  'https://github.com/flutterdevzim/CoVID-19-Tracker/blob/master/README.md#license'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 80.0, vertical: 0.5),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 100.0, vertical: 40.0),
-                    leading: Container(
-                      child: Container(
-                        child: Image(
-                          fit: BoxFit.fill,
-                          height: 90,
-                          width: 100,
-                          image: AssetImage(
-                            'assets/images/work.png',
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.developer_mode,
+                            color: Colors.grey,
                           ),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      "THE DEVELOPERS",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text(" meet the team",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch(
-                  'https://github.com/flutterdevzim/CoVID-19-Tracker/commits/master'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.5),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      child: Container(
-                        child: Image(
-                          fit: BoxFit.contain,
-                          height: 50,
-                          width: 50,
-                          image: AssetImage(
-                            'assets/images/ali.png',
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      "Alistair Holmes",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text(" Click to view profile",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch('https://github.com/alistairholmes'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.5),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      child: Container(
-                        child: Image(
-                          fit: BoxFit.contain,
-                          height: 50,
-                          width: 50,
-                          image: AssetImage(
-                            'assets/images/donn.png',
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Alistair Holmes',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3.0,
+                              ),
+                              Text(
+                                'Bulawayo, Zimbabwe',
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                        ],
                       ),
-                    ),
-                    title: Text(
-                      "Donn C",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text(" view profile",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch('https://github.com/DonnC'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.5),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      child: Container(
-                        child: Image(
-                          fit: BoxFit.contain,
-                          height: 50,
-                          width: 50,
-                          image: AssetImage(
-                            'assets/images/ngoni1.png',
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.language,
+                            color: Colors.grey,
                           ),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      "Ngonidzashe Maphosa",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text(" view profile",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch('https://github.com/Ngoni-Sama'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.5),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      padding: EdgeInsets.only(right: 12.0),
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              right: new BorderSide(
-                                  width: 4.5, color: Colors.blueGrey))),
-                      child: Icon(Icons.people, color: Colors.black54),
-                    ),
-                    title: Text(
-                      "Ngonidzashe Mangudya",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text(" view profile",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch('https://github.com/iamNGVJ'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.5),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      padding: EdgeInsets.only(right: 12.0),
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              right: new BorderSide(
-                                  width: 4.5, color: Colors.blueGrey))),
-                      child: Icon(Icons.people, color: Colors.black54),
-                    ),
-                    title: Text(
-                      "SuperCode",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text(" view profile",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () => launch('https://github.com/ignertic'),
-            ),
-            InkWell(
-              child: Card(
-                elevation: 5.0,
-                margin:
-                new EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.5),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: ListTile(
-                    contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                    leading: Container(
-                      child: Container(
-                        child: Image(
-                          fit: BoxFit.contain,
-                          height: 50,
-                          width: 50,
-                          image: AssetImage(
-                            'assets/images/ad.png',
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
+                          GestureDetector(
+                            onTap: () =>
+                                launch('https://github.com/alistairholmes'),
+                            child: Text(
+                              'Github',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    title: Text(
-                      "Admire Makusha",
-                      style: TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.bold),
-                    ),
-                    // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-                    subtitle: Row(
-                      children: <Widget>[
-                        Text("view profile",
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Divider(),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.developer_mode,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Donald Chinhuru',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3.0,
+                              ),
+                              Text(
+                                'Triangle, Zimbabwe',
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.language,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () => launch('https://github.com/DonnC'),
+                            child: Text(
+                              'Github',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Divider(),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.developer_mode,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Ngonidzashe Mangudya',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3.0,
+                              ),
+                              Text(
+                                'Harare, Zimbabwe',
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.language,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () => launch('https://github.com/iamngoni'),
+                            child: Text(
+                              'Github',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-              onTap: () => launch('https://github.com/admaku'),
             ),
           ],
         ),
