@@ -26,10 +26,11 @@ class _HomePageState extends State<HomePage> {
   final _date = new DateHelper();
   final _api = new ApiService();
   Stats _stats;
-  List<Countries> _countries = Countries.getCountries();
-  List<DropdownMenuItem<Countries>> _dropDownMenuItems;
-  Countries _country;
   CurrentCases cases;
+  List<Deaths> _deaths;
+  List<Confirmed> _confirmed;
+  List<Recovered> _recovered;
+  List<Active> _active;
 
   @override
   void initState() {
@@ -578,42 +579,52 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             FutureBuilder(
-              future: _api.getHomePageStats(),
+              future: _api.getProvincesData(),
               // ignore: missing_return
               builder: (context, snap){
                 if(snap.hasData){
-                  List<GraphStats> data = snap.data;
-                  print("printing data");
-                  print(data);
-                  List<Deaths> _deaths;
-                  List<Confirmed> _confirmed;
-                  List<Recovered> _recovered;
-                  List<Active> _active;
-                  for(var dt in data){
-                    _deaths.add(Deaths(dt.deaths, DateTime.parse(dt.date)));
-                    _confirmed.add(Confirmed(dt.confirmed, DateTime.parse(dt.date)));
-                    _recovered.add(Recovered(dt.recovered, DateTime.parse(dt.date)));
-                    _active.add(Active(dt.active, DateTime.parse(dt.date)));
-                  }
-                  return Container(
-                    height: 170,
-                    width: _width,
-                    child: SfCartesianChart(
-                      primaryXAxis: CategoryAxis(),
-                      title: ChartTitle(text: "Relevant Data",),
-                      tooltipBehavior: TooltipBehavior(enable: true),
-                      series: <ChartSeries<Deaths, String>>[
-                        LineSeries<Deaths, String>(
-                          dataSource: _deaths,
-                          xValueMapper: (Deaths stats, _) => (stats.date).toString(),
-                          yValueMapper: (Deaths stats, _) => stats.value,
-                          width: 0.4,
-                        ),
-                      ],
+                  ProvinceCases cases = snap.data;
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 170,
+                      decoration: BoxDecoration(
+                        color: textColor,
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: SfCartesianChart(
+                              primaryXAxis: CategoryAxis(),
+                              tooltipBehavior: TooltipBehavior(enable: true),
+                              series: <ChartSeries<ProvinceStats, String>>[
+                                LineSeries<ProvinceStats, String>(
+                                  dataSource: <ProvinceStats>[
+                                    ProvinceStats("Byo", int.parse(cases.bulawayo)),
+                                    ProvinceStats("Hre", int.parse(cases.harare)),
+                                    ProvinceStats("Man", int.parse(cases.manicaland)),
+                                    ProvinceStats("MsC", int.parse(cases.mashonaland_central)),
+                                    ProvinceStats("MsE", int.parse(cases.mashonaland_east)),
+                                    ProvinceStats("MsW", int.parse(cases.mashonaland_west)),
+                                    ProvinceStats("Mas", int.parse(cases.masvingo)),
+                                    ProvinceStats("MtN", int.parse(cases.matabeleland_north)),
+                                    ProvinceStats("MtS", int.parse(cases.matabeleland_south)),
+                                    ProvinceStats("Mid", int.parse(cases.midlands)),
+
+                                  ],
+                                  xValueMapper: (ProvinceStats stats, _) => stats.province,
+                                  yValueMapper: (ProvinceStats stats, _) => stats.value,
+                                  width: 0.4,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }else{
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: SizedBox(height: 20, width: 20,child: CircularProgressIndicator()));
                 }
               },
             ),
@@ -623,29 +634,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-class Deaths{
-  int value;
-  DateTime date;
-  Deaths(this.value, this.date);
-}
-
-class Recovered{
-  int value;
-  DateTime date;
-  Recovered(this.value, this.date);
-}
-
-class Active{
-  int value;
-  DateTime date;
-  Active(this.value, this.date);
-}
-
-class Confirmed{
-  int value;
-  DateTime date;
-  Confirmed(this.value, this.date);
-}
-
 
