@@ -553,24 +553,13 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    'Active Cases',
+                    'Province Statistics',
                     style: TextStyle(
                       color: questionsPageBGColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0,
                     ),
                   ),
-                  Spacer(),
-                  // FIXME: this text below must be a drop drown button
-                  Text(
-                    '18 - 22 Mar',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 11.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  // TODO: add graph
                 ],
               ),
             ),
@@ -615,6 +604,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
+
                         ],
                       ),
                     ),
