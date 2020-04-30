@@ -49,15 +49,20 @@ class HotlineScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(hospitalList[position],
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,)
-                            ),
-                            Text(numberList[position],
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(hospitalList[position],
                                 style: TextStyle(
                                   fontSize: 16.0,
-                                  color: Colors.white,),
+                                  color: Colors.white,)
+                                ),
+                                Text(numberList[position],
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,),
+                                ),
+                              ],
                             ),
                             FlatButton(
                               color: Colors.pink[200],
