@@ -89,3 +89,13 @@ class PositiveCases{
     underlyingConditions: json["underlyingConditions"]
   );
 }
+
+class GraphStats{
+  int confirmed;
+  int deaths;
+  int recovered;
+  int active;
+  String date;
+  GraphStats({this.confirmed, this.deaths, this.recovered, this.active, this.date});
+  factory GraphStats.fromJson(Map<String, dynamic> json) => GraphStats(confirmed: json["Confirmed"], deaths: json["Deaths"], recovered: json["Recovered"], active: json["Active"], date: json["Date"]);
+}

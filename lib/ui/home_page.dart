@@ -576,6 +576,17 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            FutureBuilder(
+              future: _api.getHomePageStats(),
+              builder: (context, snap){
+                if(snap.hasData){
+                  List<GraphStats> data = snap.data;
+                  print(data);
+                }else{
+                  return Center(child: Text("Loading Graph Stats"),);
+                }
+              },
+            ),
           ],
         ),
       ),

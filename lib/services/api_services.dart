@@ -358,4 +358,21 @@ class ApiService {
     }
     return data;
   }
+
+  Future<List<GraphStats>> getHomePageStats() async{
+    var url = "";
+    var response;
+    var data;
+    var dataList = List<GraphStats>();
+    try{
+      response = await http.get(url);
+      data = json.decode(response.body);
+      for(var dt in data){
+        dataList.add(GraphStats.fromJson(dt));
+      }
+    }on SocketException catch(e){
+      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
+    }
+    return dataList;
+  }
 }
