@@ -27,10 +27,6 @@ class _HomePageState extends State<HomePage> {
   final _api = new ApiService();
   Stats _stats;
   CurrentCases cases;
-  List<Deaths> _deaths;
-  List<Confirmed> _confirmed;
-  List<Recovered> _recovered;
-  List<Active> _active;
 
   @override
   void initState() {
