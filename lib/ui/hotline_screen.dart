@@ -37,7 +37,7 @@ class HotlineScreen extends StatelessWidget {
               ),
             ),
           ),
-          body: Column(
+          body: ListView(
             children: <Widget>[
               Container(
                 height: 400,
@@ -85,7 +85,7 @@ class HotlineScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('Ministry of Health on WhatsApp',
+                    Text('MoHCC on WhatsApp',
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.white,)

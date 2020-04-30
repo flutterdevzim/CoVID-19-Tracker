@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 15.0,
                                     ),
                                     Text(
-                                      'Contain several list of questions \nto checkyour physical condition.',
+                                      'Contain several list of questions \nto check your physical condition.',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 13.0,
