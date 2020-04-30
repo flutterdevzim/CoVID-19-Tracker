@@ -360,7 +360,7 @@ class ApiService {
   }
 
   Future<List<GraphStats>> getHomePageStats() async{
-    var url = "";
+    var url = "https://api.covid19api.com/live/country/zimbabwe/status/confirmed";
     var response;
     var data;
     var dataList = List<GraphStats>();

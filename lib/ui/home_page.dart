@@ -15,6 +15,7 @@ import 'package:badges/badges.dart';
 import 'package:covid_19_tracker/models/countries.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
 import 'package:http/http.dart' as http;
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -578,12 +579,41 @@ class _HomePageState extends State<HomePage> {
             ),
             FutureBuilder(
               future: _api.getHomePageStats(),
+              // ignore: missing_return
               builder: (context, snap){
                 if(snap.hasData){
                   List<GraphStats> data = snap.data;
+                  print("printing data");
                   print(data);
+                  List<Deaths> _deaths;
+                  List<Confirmed> _confirmed;
+                  List<Recovered> _recovered;
+                  List<Active> _active;
+                  for(var dt in data){
+                    _deaths.add(Deaths(dt.deaths, DateTime.parse(dt.date)));
+                    _confirmed.add(Confirmed(dt.confirmed, DateTime.parse(dt.date)));
+                    _recovered.add(Recovered(dt.recovered, DateTime.parse(dt.date)));
+                    _active.add(Active(dt.active, DateTime.parse(dt.date)));
+                  }
+                  return Container(
+                    height: 170,
+                    width: _width,
+                    child: SfCartesianChart(
+                      primaryXAxis: CategoryAxis(),
+                      title: ChartTitle(text: "Relevant Data",),
+                      tooltipBehavior: TooltipBehavior(enable: true),
+                      series: <ChartSeries<Deaths, String>>[
+                        LineSeries<Deaths, String>(
+                          dataSource: _deaths,
+                          xValueMapper: (Deaths stats, _) => (stats.date).toString(),
+                          yValueMapper: (Deaths stats, _) => stats.value,
+                          width: 0.4,
+                        ),
+                      ],
+                    ),
+                  );
                 }else{
-                  return Center(child: Text("Loading Graph Stats"),);
+                  return Center(child: CircularProgressIndicator());
                 }
               },
             ),
@@ -593,3 +623,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+class Deaths{
+  int value;
+  DateTime date;
+  Deaths(this.value, this.date);
+}
+
+class Recovered{
+  int value;
+  DateTime date;
+  Recovered(this.value, this.date);
+}
+
+class Active{
+  int value;
+  DateTime date;
+  Active(this.value, this.date);
+}
+
+class Confirmed{
+  int value;
+  DateTime date;
+  Confirmed(this.value, this.date);
+}
+
+
