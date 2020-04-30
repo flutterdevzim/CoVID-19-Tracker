@@ -396,4 +396,21 @@ class ApiService {
     }
     return dataList;
   }
+
+  Future<List<GraphStats>> getHomePageStats() async{
+    var url = "https://api.covid19api.com/live/country/zimbabwe/status/confirmed";
+    var response;
+    var data;
+    var dataList = List<GraphStats>();
+    try{
+      response = await http.get(url);
+      data = json.decode(response.body);
+      for(var dt in data){
+        dataList.add(GraphStats.fromJson(dt));
+      }
+    }on SocketException catch(e){
+      Fluttertoast.showToast(msg: "Check your internet connection", textColor: darkColor, backgroundColor: textColor);
+    }
+    return dataList;
+  }
 }
