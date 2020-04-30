@@ -32,30 +32,31 @@ final List carouselImages = map<Widget>(
   stepList,
   infoList,
   (index, i) {
-    return Container(
-      height: 200,
-      margin: EdgeInsets.all(5.0),
-      child: Column(
-        children: <Widget>[
-          Image.asset(i, fit: BoxFit.fitHeight, width: 200),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              stepList[index],
-              style: Constants.kTitleStyle,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: 350,
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.all(5.0),
+        child: Column(
+          children: <Widget>[
+            Image.asset(i, fit: BoxFit.fitHeight, width: 200),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
-                infoList[index],
-                style: Constants.kSubtitleStyle,
+                stepList[index],
+                style: Constants.kTitleStyle,
               ),
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 350,
+                child: Text(
+                  infoList[index],
+                  style: Constants.kSubtitleStyle,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   },
@@ -88,7 +89,6 @@ class _PreventativeMeasuresScreenState
         appBar: AppBar(
             titleSpacing: 0.0,
             centerTitle: true,
-            leading: _goBackButton(context),
             title: Text(
               'Prevention',
               style: TextStyle(
@@ -227,12 +227,4 @@ class CustomClipPath extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
-
-Widget _goBackButton(BuildContext context) {
-  return IconButton(
-      icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-      onPressed: () {
-        Navigator.of(context).pop(true);
-      });
 }
