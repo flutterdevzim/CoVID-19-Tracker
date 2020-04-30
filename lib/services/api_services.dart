@@ -46,7 +46,7 @@ class ApiService {
   }
 
   Future<List<DonationSummary>> getDonationSummary() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(milliseconds: 500));
     List<DonationSummary> donationSummary = [
       DonationSummary(
         0,
@@ -97,7 +97,7 @@ class ApiService {
 
   Future<List<FAQ>> getFAQs() async {
     // get all FAQs
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(milliseconds: 500));
 
     List<FAQ> faqs = [
       FAQ(
@@ -143,7 +143,7 @@ class ApiService {
 
   Future<List<Donor>> getDonors() async {
     // get all main donors
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(milliseconds: 500));
 
     List<Donor> donors = [
       Donor(

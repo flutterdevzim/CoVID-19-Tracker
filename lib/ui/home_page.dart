@@ -1,5 +1,6 @@
 import 'package:covid_19_tracker/models/countrystats.dart';
 import 'package:covid_19_tracker/services/api_services.dart';
+import 'package:covid_19_tracker/ui/about.dart';
 import 'package:covid_19_tracker/ui/self_checker.dart';
 import 'package:covid_19_tracker/ui/stats_page.dart';
 import 'package:covid_19_tracker/utils/date_retriever.dart';
@@ -55,14 +56,16 @@ class _HomePageState extends State<HomePage> {
                       child: Icon(
                         Icons.info,
                         color: Colors.grey,
-                        size: 30,
+                        size: 35,
                       ),
                     ),
                     onTap: () {
-                      /*Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AboutPage()));*/
+                          builder: (context) => AboutPage(),
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -148,43 +151,47 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Positioned(
-                          top: 21.0,
+                          top: 30.0,
                           left: 35.0,
-                          child: Row(
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Safe Check Up Covid-19',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17.0,
+                          child: Container(
+                            width: _width,
+                            child: Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Self Check Up Covid-19',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17.0,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Text(
-                                    'Contain several list of questions to check\nyour physical condition.',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.w600,
+                                    SizedBox(
+                                      height: 15.0,
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 0.125 * _width,
-                              ),
-                              Icon(
-                                Icons.chevron_right,
-                                color: Colors.white,
-                                size: 50.0,
-                              ),
-                            ],
+                                    Text(
+                                      'Contain several list of questions \nto checkyour physical condition.',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: _width * 0.06,
+                                ),
+                                Icon(
+                                  Icons.chevron_right,
+                                  color: Colors.white,
+                                  size: 50.0,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -475,7 +482,7 @@ class _HomePageState extends State<HomePage> {
                                             color: Color(0xFF44B876),
                                           )),
                                       child: Icon(
-                                        Icons.favorite,
+                                        Icons.do_not_disturb_on,
                                         color: Color(0xFF44B876),
                                         size: 15,
                                       ),
@@ -534,7 +541,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       child: Icon(
-                                        Icons.error,
+                                        Icons.favorite,
                                         color: Colors.yellow,
                                         size: 15,
                                       ),
