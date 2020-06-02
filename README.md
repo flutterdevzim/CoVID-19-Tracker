@@ -16,10 +16,10 @@
       <td> News Page</td>
    </tr>
    <tr>
-      <td><img src="assets/demos/home.png" width=270 height=370></td>
-      <td><img src="assets/demos/prevention.png" width=270 height=370></td>
-      <td><img src="assets/demos/hotline.png" width=270 height=370></td>
-      <td><img src="assets/demos/news.png" width=270 height=370></td>
+      <td><img src="assets/demos/home.png"</td>
+      <td><img src="assets/demos/prevention.png"</td>
+      <td><img src="assets/demos/hotline.png"</td>
+      <td><img src="assets/demos/news.png"</td>
    </tr>
 </table>
 
