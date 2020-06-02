@@ -7,12 +7,21 @@
 * See Current Cases
 * Self Checker
 
-# Screenshots
-
-<img src="assets/ui_designs/progress1.jpg" width="250">
-<img src="assets/ui_designs/progress2.jpg" width="250">
-<img src="https://user-images.githubusercontent.com/22801227/78057629-5a3dcc00-7387-11ea-8b52-9044211c9043.jpeg" width="250">
-<img src="https://user-images.githubusercontent.com/22801227/78057634-5c078f80-7387-11ea-9fdf-52e531106368.jpeg" width="250">
+# Screenshots **Hack4CoVID**
+<table>
+   <tr>
+      <td> Home Page</td>
+      <td> Prevention</td>
+      <td> Hot line</td>
+      <td> News Page</td>
+   </tr>
+   <tr>
+      <td><img src="assets/demos/home.png" width=270 height=370></td>
+      <td><img src="assets/demos/prevention.png" width=270 height=370></td>
+      <td><img src="assets/demos/hotline.png" width=270 height=370></td>
+      <td><img src="assets/demos/news.png" width=270 height=370></td>
+   </tr>
+</table>
 
 # Contributions :
 
