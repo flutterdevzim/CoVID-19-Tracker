@@ -7,9 +7,7 @@ import 'package:covid_19_tracker/utils/date_retriever.dart';
 import 'package:covid_19_tracker/widgets/stats_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_19_tracker/utils/color_theme.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:http/http.dart' as http;
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -30,6 +28,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var _width = MediaQuery.of(context).size.width;
     var _height = MediaQuery.of(context).size.height;
+    List<String> _provinces = [
+      "Byo",
+      "Hre",
+      "Man",
+      "Msc",
+      "Mse",
+      "Msw",
+      "Mas",
+      "Mtn",
+      "Mts",
+      "Mid"
+    ];
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -188,11 +198,6 @@ class _HomePageState extends State<HomePage> {
                                 SizedBox(
                                   width: _width * 0.06,
                                 ),
-                                Icon(
-                                  Icons.chevron_right,
-                                  color: Colors.white,
-                                  size: 50.0,
-                                ),
                               ],
                             ),
                           ),
@@ -249,6 +254,7 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.6),
                       fontSize: 11,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -257,11 +263,17 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, snap) {
                     if (snap.hasData) {
                       DateUpdated date = snap.data;
-                      return Text(
-                        "${date.date}",
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.6),
-                          fontSize: 11,
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 5.0,
+                        ),
+                        child: Text(
+                          "${date.date}",
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.6),
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       );
                     } else {
@@ -329,7 +341,7 @@ class _HomePageState extends State<HomePage> {
                                             "${cases.totalTests}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 30,
+                                              fontSize: 25,
                                               color: Colors.blue,
                                             ),
                                           ),
@@ -384,7 +396,7 @@ class _HomePageState extends State<HomePage> {
                                           "${cases.deaths}",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 30,
+                                            fontSize: 25,
                                             color: Color(0xFFF94340),
                                           ),
                                         ),
@@ -441,7 +453,7 @@ class _HomePageState extends State<HomePage> {
                                             "${cases.positiveCases}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 30,
+                                              fontSize: 25,
                                               color: Color(0xFFFC9246),
                                             ),
                                           ),
@@ -500,7 +512,7 @@ class _HomePageState extends State<HomePage> {
                                             "${cases.negativeCases}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 30,
+                                              fontSize: 25,
                                               color: Color(0xFF44B876),
                                             ),
                                           ),
@@ -559,7 +571,7 @@ class _HomePageState extends State<HomePage> {
                                             "${cases.icu}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 30,
+                                              fontSize: 25,
                                               color: Colors.yellow,
                                             ),
                                           ),
@@ -610,50 +622,183 @@ class _HomePageState extends State<HomePage> {
             FutureBuilder(
               future: _api.getProvincesData(),
               // ignore: missing_return
-              builder: (context, snap){
-                if(snap.hasData){
+              builder: (context, snap) {
+                if (snap.hasData) {
                   ProvinceCases cases = snap.data;
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      height: 170,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 15.0,
+                      ),
+                      height: 200,
                       decoration: BoxDecoration(
-                        color: textColor,
+                        color: Color(0xFF232D37),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
                       ),
                       child: Column(
                         children: <Widget>[
                           Expanded(
-                            child: SfCartesianChart(
-                              primaryXAxis: CategoryAxis(),
-                              tooltipBehavior: TooltipBehavior(enable: true),
-                              series: <ChartSeries<ProvinceStats, String>>[
-                                LineSeries<ProvinceStats, String>(
-                                  dataSource: <ProvinceStats>[
-                                    ProvinceStats("Byo", int.parse(cases.bulawayo)),
-                                    ProvinceStats("Hre", int.parse(cases.harare)),
-                                    ProvinceStats("Man", int.parse(cases.manicaland)),
-                                    ProvinceStats("MsC", int.parse(cases.mashonaland_central)),
-                                    ProvinceStats("MsE", int.parse(cases.mashonaland_east)),
-                                    ProvinceStats("MsW", int.parse(cases.mashonaland_west)),
-                                    ProvinceStats("Mas", int.parse(cases.masvingo)),
-                                    ProvinceStats("MtN", int.parse(cases.matabeleland_north)),
-                                    ProvinceStats("MtS", int.parse(cases.matabeleland_south)),
-                                    ProvinceStats("Mid", int.parse(cases.midlands)),
-
-                                  ],
-                                  xValueMapper: (ProvinceStats stats, _) => stats.province,
-                                  yValueMapper: (ProvinceStats stats, _) => stats.value,
-                                  width: 0.4,
-                                ),
-                              ],
+                            child: LineChart(
+                              LineChartData(
+                                  lineTouchData: LineTouchData(
+                                    enabled: true,
+                                  ),
+                                  gridData: FlGridData(
+                                    show: true,
+                                    drawVerticalLine: true,
+                                    getDrawingHorizontalLine: (value) {
+                                      return FlLine(
+                                        color: Color(0xFF37434D),
+                                        strokeWidth: 1,
+                                      );
+                                    },
+                                    getDrawingVerticalLine: (value) {
+                                      return FlLine(
+                                        color: Color(0xFF37434D),
+                                        strokeWidth: 1,
+                                      );
+                                    },
+                                  ),
+                                  titlesData: FlTitlesData(
+                                    show: true,
+                                    bottomTitles: SideTitles(
+                                      showTitles: true,
+                                      reservedSize: 22,
+                                      textStyle: TextStyle(
+                                        color: Color(0xFF68737d),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                      getTitles: (value) {
+                                        return _provinces[value.toInt()];
+                                      },
+                                      margin: 8,
+                                    ),
+                                    leftTitles: SideTitles(
+                                      showTitles: false,
+                                      reservedSize: 28,
+                                      textStyle: TextStyle(
+                                        color: Color(0xFF68737d),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                      getTitles: (value) {
+                                        return value.toString();
+                                      },
+                                      margin: 12,
+                                    ),
+                                  ),
+                                  borderData: FlBorderData(
+                                    show: true,
+                                    border: Border.all(
+                                      color: Color(
+                                        0xFF37434D,
+                                      ),
+                                    ),
+                                  ),
+                                  lineBarsData: [
+                                    LineChartBarData(
+                                      spots: [
+                                        FlSpot(
+                                          0,
+                                          double.parse(
+                                            cases.bulawayo,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          1,
+                                          double.parse(
+                                            cases.harare,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          2,
+                                          double.parse(
+                                            cases.manicaland,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          3,
+                                          double.parse(
+                                            cases.mashonaland_central,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          4,
+                                          double.parse(
+                                            cases.mashonaland_east,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          5,
+                                          double.parse(
+                                            cases.mashonaland_west,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          6,
+                                          double.parse(
+                                            cases.masvingo,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          7,
+                                          double.parse(
+                                            cases.matabeleland_north,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          8,
+                                          double.parse(
+                                            cases.matabeleland_south,
+                                          ),
+                                        ),
+                                        FlSpot(
+                                          9,
+                                          double.parse(
+                                            cases.midlands,
+                                          ),
+                                        ),
+                                      ],
+                                      isCurved: true,
+                                      barWidth: 5,
+                                      isStrokeCapRound: true,
+                                      dotData: FlDotData(
+                                        show: false,
+                                      ),
+                                      colors: [
+                                        Color(0xFF23B6E6),
+                                        Color(0xFF02D39A),
+                                      ],
+                                      belowBarData: BarAreaData(
+                                        show: true,
+                                        colors: [
+                                          Color(0xFF23B6E6),
+                                          Color(0xFF02D39A)
+                                        ]
+                                            .map((color) =>
+                                                color.withOpacity(0.3))
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ]),
                             ),
                           ),
                         ],
                       ),
                     ),
                   );
-                }else{
-                  return Center(child: SizedBox(height: 20, width: 20,child: CircularProgressIndicator()));
+                } else {
+                  return Center(
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 }
               },
             ),
@@ -663,4 +808,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

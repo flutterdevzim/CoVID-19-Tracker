@@ -4,8 +4,6 @@ import 'package:covid_19_tracker/models/donation_summary.dart';
 import 'package:covid_19_tracker/models/donors.dart';
 import 'package:covid_19_tracker/models/faq.dart';
 import 'package:covid_19_tracker/models/hackathon_news.dart';
-import 'package:covid_19_tracker/utils/color_theme.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:covid_19_tracker/models/countrystats.dart';
 
@@ -22,10 +20,6 @@ class ApiService {
       return news;
     } catch (e) {
       // error
-      Fluttertoast.showToast(
-          msg: "Check your internet connection\nor try again",
-          textColor: darkColor,
-          backgroundColor: textColor);
     }
   }
 
@@ -36,12 +30,7 @@ class ApiService {
     try {
       response = await http.get(url);
       data = CurrentCases.fromJson(json.decode(response.body)[0]);
-    } on SocketException catch (e) {
-      Fluttertoast.showToast(
-          msg: "Check your internet connection",
-          textColor: darkColor,
-          backgroundColor: textColor);
-    }
+    } on SocketException catch (e) {}
     return data;
   }
 
@@ -319,12 +308,7 @@ class ApiService {
     try {
       response = await http.get(url);
       date = DateUpdated.fromJson(json.decode(response.body)[0]);
-    } on SocketException catch (e) {
-      Fluttertoast.showToast(
-          msg: "Check your internet connection",
-          textColor: darkColor,
-          backgroundColor: textColor);
-    }
+    } on SocketException catch (e) {}
     return date;
   }
 
@@ -335,12 +319,7 @@ class ApiService {
     try {
       response = await http.get(url);
       data = CasesBySex.fromJson(json.decode(response.body)[0]);
-    } on SocketException catch (e) {
-      Fluttertoast.showToast(
-          msg: "Check your internet connection",
-          textColor: darkColor,
-          backgroundColor: textColor);
-    }
+    } on SocketException catch (e) {}
     return data;
   }
 
@@ -355,12 +334,7 @@ class ApiService {
       for (var dt in data) {
         dataList.add(PositiveCases.fromJson(dt));
       }
-    } on SocketException catch (e) {
-      Fluttertoast.showToast(
-          msg: "Check your internet connection",
-          textColor: darkColor,
-          backgroundColor: textColor);
-    }
+    } on SocketException catch (e) {}
     return dataList;
   }
 
@@ -371,12 +345,7 @@ class ApiService {
     try {
       response = await http.get(url);
       data = ProvinceCases.fromJson(json.decode(response.body)[0]);
-    } on SocketException catch (e) {
-      Fluttertoast.showToast(
-          msg: "Check your internet connection",
-          textColor: darkColor,
-          backgroundColor: textColor);
-    }
+    } on SocketException catch (e) {}
     return data;
   }
 }
