@@ -12,7 +12,6 @@ class Base extends StatefulWidget {
 }
 
 class _BaseState extends State<Base> {
-
   int _current = 0;
   final List<Widget> _screens = [
     HomePage(),
@@ -91,4 +90,3 @@ class _BaseState extends State<Base> {
     );
   }
 }
-

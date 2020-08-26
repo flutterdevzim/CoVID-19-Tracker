@@ -114,7 +114,9 @@ class Newspage extends StatelessWidget {
                               ),
                               child: MaterialButton(
                                 color: Colors.white.withOpacity(0.65),
-                                onPressed: () => launch(post.url,),
+                                onPressed: () => launch(
+                                  post.url,
+                                ),
                                 child: Center(
                                   child: Text(
                                     'Read more',

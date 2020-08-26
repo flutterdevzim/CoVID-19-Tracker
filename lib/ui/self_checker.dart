@@ -20,7 +20,8 @@ class _SelfCheckerState extends State<SelfCheckerScreen> {
         title: Text(
           'Self Check Up',
           style: TextStyle(
-            fontSize: 23, fontWeight: FontWeight.w700,
+            fontSize: 23,
+            fontWeight: FontWeight.w700,
             color: Colors.white,
           ),
         ),

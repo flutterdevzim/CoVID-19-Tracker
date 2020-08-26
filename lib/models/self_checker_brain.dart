@@ -35,19 +35,16 @@ class SelfCheckerBrain {
         answer1: 'No',
         answer2: 'Yes'),
     SelfChecker(
-        selfCheckQuestion:
-        'Show Results?',
-        answer1: 'No',
-        answer2: 'Yes'),
+        selfCheckQuestion: 'Show Results?', answer1: 'No', answer2: 'Yes'),
     SelfChecker(
         selfCheckQuestion:
-        'Based on your answers, it would be good to seek medical attention immediately. '
+            'Based on your answers, it would be good to seek medical attention immediately. '
             'Please use the emergency numbers on the Hotline Page',
         answer1: 'Restart',
         answer2: ''),
     SelfChecker(
         selfCheckQuestion:
-        'You dont seem to be infected, however please continue to follow prevention guidelines.',
+            'You dont seem to be infected, however please continue to follow prevention guidelines.',
         answer1: 'Restart',
         answer2: ''),
   ];

@@ -25,92 +25,95 @@ class HotlineScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: questionsPageBGColor,
-          appBar: AppBar(
-            backgroundColor: questionsPageBGColor,
-            centerTitle: true,
-            title: Text(
-              'Covid-19 Hotline Numbers',
-              style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
+      backgroundColor: questionsPageBGColor,
+      appBar: AppBar(
+        backgroundColor: questionsPageBGColor,
+        centerTitle: true,
+        title: Text(
+          'Covid-19 Hotline Numbers',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
           ),
-          body: ListView(
-            children: <Widget>[
-              Container(
-                height: 400,
-                width: MediaQuery.of(context).size.width,
-                child: ListView.builder(
-                    itemBuilder: (context, position) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(hospitalList[position],
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.white,)
-                                ),
-                                Text(numberList[position],
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.white,),
-                                ),
-                              ],
-                            ),
-                            FlatButton(
-                              color: Colors.pink[200],
-                              onPressed: () {
-                                // Open dailer to call number
-                                String phoneCall = 'tel:' + numberList[position];
-                                launch(phoneCall);
-                              },
-                              child: Text('Call'),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                    itemCount: hospitalList.length,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('MoHCC on WhatsApp',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,)
-                    ),
-                    FlatButton(
-                      color: Colors.pink[200],
-                      onPressed: () {
-                        // Open dailer to call number
-                        String openWhatsApp = 'https://api.whatsapp.com/send?phone=263714734593';
-                        launch(openWhatsApp);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 400,
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+              itemBuilder: (context, position) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Chat'),
-                          Icon(Icons.message),
+                          Text(hospitalList[position],
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                              )),
+                          Text(
+                            numberList[position],
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            ),
+                          ),
                         ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ],
+                      FlatButton(
+                        color: Colors.pink[200],
+                        onPressed: () {
+                          // Open dailer to call number
+                          String phoneCall = 'tel:' + numberList[position];
+                          launch(phoneCall);
+                        },
+                        child: Text('Call'),
+                      )
+                    ],
+                  ),
+                );
+              },
+              itemCount: hospitalList.length,
+            ),
           ),
-        )
-    );
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('MoHCC on WhatsApp',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.white,
+                    )),
+                FlatButton(
+                  color: Colors.pink[200],
+                  onPressed: () {
+                    // Open dailer to call number
+                    String openWhatsApp =
+                        'https://api.whatsapp.com/send?phone=263714734593';
+                    launch(openWhatsApp);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text('Chat'),
+                      Icon(Icons.message),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    ));
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-
   static const kTitleStyle = TextStyle(
       color: Color(0xFF212B46),
       fontSize: 19.0,
