@@ -6,6 +6,7 @@
 * View Latest News
 * See Current Cases
 * Self Checker
+* Prevention
 
 # Screenshots **Hack4CoVID**
 <table>
